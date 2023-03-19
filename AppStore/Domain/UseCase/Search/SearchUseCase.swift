@@ -9,12 +9,10 @@ import Foundation
 import RxSwift
 
 final class SearchUseCase: SearchUseCaseInterface {
-    let searchRepository = SearchRepository()
+    private let searchRepository = SearchRepository()
     
-    func recentlyKeyworkdList() -> BehaviorRelay<[String]> {
-        searchRepository.emit()
-        return searchRepository.recentlyKeywordList
-        
+    func recentlyKeyworkdList() -> Observable<[String]> {
+        searchRepository.fetchRecentlyKeyworkdList()
     }
     
     func save(keyworkd: String) {

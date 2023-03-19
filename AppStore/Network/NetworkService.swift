@@ -6,9 +6,7 @@
 //
 
 import Foundation
-import Network
 import RxSwift
-import UIKit
 
 enum ResponseResult {
     case success(Data?)
@@ -20,6 +18,7 @@ enum NetworkError: Error {
 }
 
 final class NetworkService: NSObject {
+    
     static let shared: NetworkService = NetworkService()
     
     func requestSend(request: URLRequest) -> Observable<ResponseResult> {
@@ -29,21 +28,21 @@ final class NetworkService: NSObject {
                     observable.onError(error)
                     return
                 }
-                
                 guard let httpResponse = response as? HTTPURLResponse else {
                     observable.onError(NetworkError.responseError)
                     return
                 }
-                
                 let range = 200..<300
-                if range.contains(httpResponse.statusCode) {
+                if  range.contains(httpResponse.statusCode) {
                     observable.onNext(.success(data))
-                } else {
+                }else{
                     observable.onError(NetworkError.responseError)
                 }
             }
             task.resume()
-            return Disposables.create { task.cancel() }
+            return Disposables.create{
+                task.cancel()
+            }
         }
     }
     
@@ -54,22 +53,22 @@ final class NetworkService: NSObject {
                     observable.onError(error)
                     return
                 }
-                
                 guard let httpResponse = response as? HTTPURLResponse else {
                     observable.onError(NetworkError.responseError)
                     return
                 }
-                
                 let successRange = 200..<300
-                if successRange.contains(httpResponse.statusCode) {
+                if successRange.contains(httpResponse.statusCode){
                     observable.onNext(.success(data))
-                } else {
+                }else{
                     observable.onError(NetworkError.responseError)
                 }
             }
             
             task.resume()
-            return Disposables.create { task.cancel() }
+            return Disposables.create{
+                task.cancel()
+            }
         }
     }
     
@@ -94,4 +93,3 @@ final class NetworkService: NSObject {
 //        return dataTask
 //    }
 }
-

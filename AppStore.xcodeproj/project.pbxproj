@@ -36,6 +36,11 @@
 		8BA41AAB29C69CFF00DF87A4 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA41AAA29C69CFF00DF87A4 /* UIViewController+Extensions.swift */; };
 		8BA41AAD29C69FC700DF87A4 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA41AAC29C69FC700DF87A4 /* SearchResultCell.swift */; };
 		8BA41AAF29C6A03200DF87A4 /* RecentlyKeywordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA41AAE29C6A03200DF87A4 /* RecentlyKeywordCell.swift */; };
+		8BEB62A529C72D3A0068D4AC /* SearchResultUseCaseInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEB62A429C72D3A0068D4AC /* SearchResultUseCaseInterface.swift */; };
+		8BEB62A729C72EAA0068D4AC /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEB62A629C72EAA0068D4AC /* APIRequest.swift */; };
+		8BEB62A929C73B120068D4AC /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEB62A829C73B120068D4AC /* SearchAPI.swift */; };
+		8BEB62AB29C73B360068D4AC /* NetworksConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEB62AA29C73B360068D4AC /* NetworksConfigurable.swift */; };
+		8BEB62AD29C73C760068D4AC /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BEB62AC29C73C760068D4AC /* AppInfo.swift */; };
 		8BFB8D7A29C60EE6001CB9FB /* ViewModelBindableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB8D7929C60EE6001CB9FB /* ViewModelBindableType.swift */; };
 		8BFB8D7C29C61067001CB9FB /* TransitionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB8D7B29C61067001CB9FB /* TransitionModel.swift */; };
 		8BFB8D7E29C610BA001CB9FB /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB8D7D29C610BA001CB9FB /* Scene.swift */; };
@@ -102,6 +107,11 @@
 		8BA41AAA29C69CFF00DF87A4 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		8BA41AAC29C69FC700DF87A4 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		8BA41AAE29C6A03200DF87A4 /* RecentlyKeywordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyKeywordCell.swift; sourceTree = "<group>"; };
+		8BEB62A429C72D3A0068D4AC /* SearchResultUseCaseInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultUseCaseInterface.swift; sourceTree = "<group>"; };
+		8BEB62A629C72EAA0068D4AC /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		8BEB62A829C73B120068D4AC /* SearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
+		8BEB62AA29C73B360068D4AC /* NetworksConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworksConfigurable.swift; sourceTree = "<group>"; };
+		8BEB62AC29C73C760068D4AC /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		8BFB8D7929C60EE6001CB9FB /* ViewModelBindableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBindableType.swift; sourceTree = "<group>"; };
 		8BFB8D7B29C61067001CB9FB /* TransitionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionModel.swift; sourceTree = "<group>"; };
 		8BFB8D7D29C610BA001CB9FB /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
@@ -173,6 +183,7 @@
 		8B080CF029C70258006E412A /* SearchResult */ = {
 			isa = PBXGroup;
 			children = (
+				8BEB62A329C72D2B0068D4AC /* Protocol */,
 				8B62EAB429C6DDC300749D50 /* SearchResultUseCase.swift */,
 			);
 			path = SearchResult;
@@ -275,7 +286,10 @@
 		8B62EAAD29C6DC4700749D50 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				8BEB62A829C73B120068D4AC /* SearchAPI.swift */,
+				8BEB62AA29C73B360068D4AC /* NetworksConfigurable.swift */,
 				8B62EAAE29C6DC6300749D50 /* NetworkService.swift */,
+				8BEB62A629C72EAA0068D4AC /* APIRequest.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -285,6 +299,7 @@
 			children = (
 				8B080CEA29C6FEAE006E412A /* Repository */,
 				8B62EAB129C6DCDA00749D50 /* UseCase */,
+				8BEB62AC29C73C760068D4AC /* AppInfo.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -355,6 +370,14 @@
 				8BFB8D8129C612DC001CB9FB /* SceneCoordinator.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		8BEB62A329C72D2B0068D4AC /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				8BEB62A429C72D3A0068D4AC /* SearchResultUseCaseInterface.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		BBA3D9874C2B86A78ABF3DE8 /* Frameworks */ = {
@@ -609,9 +632,11 @@
 				8BFB8D7C29C61067001CB9FB /* TransitionModel.swift in Sources */,
 				8BFB8D8029C61282001CB9FB /* SceneCoordinatorType.swift in Sources */,
 				8B080CEC29C6FECF006E412A /* SearchRepository.swift in Sources */,
+				8BEB62A729C72EAA0068D4AC /* APIRequest.swift in Sources */,
 				8B62EAB729C6DDD000749D50 /* DetailUseCase.swift in Sources */,
 				8B46ACCA29C6096D00B1AC8C /* DetailViewController.swift in Sources */,
 				8BA41AAD29C69FC700DF87A4 /* SearchResultCell.swift in Sources */,
+				8BEB62AB29C73B360068D4AC /* NetworksConfigurable.swift in Sources */,
 				8B46ACBA29C6078D00B1AC8C /* SearchViewModel.swift in Sources */,
 				8BA41AAB29C69CFF00DF87A4 /* UIViewController+Extensions.swift in Sources */,
 				8B080CF429C70282006E412A /* SearchUseCase.swift in Sources */,
@@ -620,10 +645,13 @@
 				8BFB8D7E29C610BA001CB9FB /* Scene.swift in Sources */,
 				8B080CEE29C6FF59006E412A /* SearchRepositoryInterface.swift in Sources */,
 				8BFB8D8429C61488001CB9FB /* LatestSearchModel.swift in Sources */,
+				8BEB62A529C72D3A0068D4AC /* SearchResultUseCaseInterface.swift in Sources */,
 				8BFB8D8229C612DC001CB9FB /* SceneCoordinator.swift in Sources */,
 				8B46AC8629C6060900B1AC8C /* AppDelegate.swift in Sources */,
 				8B46ACC829C6095E00B1AC8C /* SearchViewController.swift in Sources */,
 				8BA41AAF29C6A03200DF87A4 /* RecentlyKeywordCell.swift in Sources */,
+				8BEB62AD29C73C760068D4AC /* AppInfo.swift in Sources */,
+				8BEB62A929C73B120068D4AC /* SearchAPI.swift in Sources */,
 				8B62EAAF29C6DC6300749D50 /* NetworkService.swift in Sources */,
 				8B46AC8829C6060900B1AC8C /* SceneDelegate.swift in Sources */,
 				8BFB8D7A29C60EE6001CB9FB /* ViewModelBindableType.swift in Sources */,

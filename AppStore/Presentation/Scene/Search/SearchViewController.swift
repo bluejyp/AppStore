@@ -26,8 +26,8 @@ class SearchViewController: UIViewController {
     var viewModel = SearchViewModel()
     let bag = DisposeBag()
     var searchKeyword: PublishSubject<String> = PublishSubject<String>()
-    var saveKeyword: PublishSubject<String> = PublishSubject<String>()
-    
+    var recentlyKeywordList = PublishSubject<[String]>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -76,18 +76,12 @@ class SearchViewController: UIViewController {
     
     
     func bindViewModel() {
-        let output = viewModel.transform(input: SearchViewModel.Input(keyword: saveKeyword))
-                                         
+        let output = viewModel.transform(input: SearchViewModel.Input(keyword: searchKeyword))
+        
         output.recentlyKeywordList
             .bind(to: recentlyKeywordTableView.rx.items(cellIdentifier: "RecentlyKeywordCell")) { (index, element, cell) in
                 cell.textLabel?.text = element
             }.disposed(by: bag)
-        
-        searchResultController.searchKeyword.subscribe { [weak self] keyword in
-            print("searchVC: \(keyword)")
-            self?.saveKeyword.onNext(keyword)
-        }
-        .disposed(by: bag)
     }
 }
 
@@ -106,11 +100,19 @@ extension SearchViewController {
     fileprivate func bindingSearchView() {
         //SearchButton to serachresultcontroller.searchKeyword
         searchController.searchBar.rx.searchButtonClicked
-            .compactMap {[weak self] in
-                self?.searchController.searchBar.text
+            .compactMap { [weak self] in
+                return self?.searchController.searchBar.text
             }.bind(to: searchResultController.searchKeyword)
             .disposed(by: self.bag)
         
+//
+        searchController.searchBar.rx.searchButtonClicked
+            .bind { [weak self] in
+//                self?.viewModel.transform(input: SearchViewModel.Input(keyword: self!.searchKeyword))
+                print("searchButtonClicked bind2")
+            }
+            .disposed(by: self.bag)
+
         //cancleButton to remove SearchResult
         searchController.searchBar.rx.cancelButtonClicked
             .compactMap{""}

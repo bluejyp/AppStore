@@ -9,6 +9,14 @@ import UIKit
 
 class SearchResultCell: UITableViewCell {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    var itemInfo: AppInfo? {
+        didSet {
+            titleLabel.text = itemInfo?.trackName
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
