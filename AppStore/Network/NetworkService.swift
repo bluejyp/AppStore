@@ -72,24 +72,24 @@ final class NetworkService: NSObject {
         }
     }
     
-//    func downloadData(request: URLRequest, _ complete: @escaping(ResponseResult) -> Void) -> URLSessionDataTask {
-//        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
-//            if let error = error {
-//                complete(.failure(error))
-//                return
-//            }
-//            guard let httpResponse = response as? HTTPURLResponse else {
-//                complete(.failure(ImageServiceError.responseError))
-//                return
-//            }
-//            let successRange = 200..<300
-//            if successRange.contains(httpResponse.statusCode){
-//                complete(.success(data))
-//            }else{
-//                complete(.failure(ImageServiceError.responseError))
-//            }
-//        }
-//        dataTask.resume()
-//        return dataTask
-//    }
+    func downloadData(request: URLRequest, _ complete: @escaping(ResponseResult) -> Void) -> URLSessionDataTask {
+        let dataTask = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                complete(.failure(error))
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse else {
+                complete(.failure(ImageServiceError.responseError))
+                return
+            }
+            let successRange = 200..<300
+            if successRange.contains(httpResponse.statusCode){
+                complete(.success(data))
+            }else{
+                complete(.failure(ImageServiceError.responseError))
+            }
+        }
+        dataTask.resume()
+        return dataTask
+    }
 }

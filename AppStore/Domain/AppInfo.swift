@@ -13,14 +13,10 @@ struct SearchResponseModel: Codable {
 }
 
 public struct AppInfo: RawDataProtocol {
-    var ipadScreenshotUrls: [String]?
-    var appletvScreenshotUrls: [String]?
     var artworkUrl60: String?
     var artworkUrl512: String?
-    var artworkUrl100: String?
-    var artistViewUrl: String?
+    var artworkUrl100: String
     var screenshotUrls: [String]?
-    var feature: [String]? //TODO 더 알아봐야함 형식을 알 수 없음.
     var supportedDevices: [String]?
     var advisories: [String]?
     var isGameCenterEnabled: Bool?
@@ -31,8 +27,6 @@ public struct AppInfo: RawDataProtocol {
     var fileSizeBytes: String?
     var formattedPrice: String?
     var contentAdvisoryRating: String?
-    var averageUserRatingForCurrentVersion: Double?
-    var userRatingCountForCurrentVersion: Double?
     var trackViewUrl: String?
     var trackContentRating: String?
     var averageUserRating: Double?
@@ -45,7 +39,6 @@ public struct AppInfo: RawDataProtocol {
     var genreIds: [String]?
     var isVppDeviceBasedLicensingEnabled: Bool?
     var currentVersionReleaseDate: String?
-    var releaseNotes: String?
     var z: Double?
     var currency: String?
     var version: String?
@@ -56,5 +49,11 @@ public struct AppInfo: RawDataProtocol {
     var price: Float?
     var description: String?
     var userRatingCount: Double?
-    
+    var averageUserRatingForCurrentVersion: Double?
+    var userRatingCountForCurrentVersion: Double?
+    var artistViewUrl: String?
+    var releaseNotes: String?
+    var feature: [String]?
+    var ipadScreenshotUrls: [String]?
+    var appletvScreenshotUrls: [String]?
 }

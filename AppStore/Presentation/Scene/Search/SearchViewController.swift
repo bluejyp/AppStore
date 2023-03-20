@@ -20,6 +20,7 @@ class SearchViewController: UIViewController {
     
     lazy var searchResultController: SearchResultViewController = {
         let resultViewController = SearchResultViewController.storyboardInstantiate()
+        resultViewController.parentNavigationController = self.navigationController
         return resultViewController
     }()
     
@@ -34,45 +35,12 @@ class SearchViewController: UIViewController {
         configureUI()
         bindViewModel()
         bindingSearchView()
-        // init
-        // userDefaults에서 로드
-        // data observing
-        // 테이블뷰에 바인딩
-        
-        // Act1. 최근 키워드 하나 선택
-        //  -> SearchResult 화면 전환
-        
-        // Act2. 검색어 입력후 검색 버튼 선택
-        //  -> 검색어를 userDefaults에 저장.
-        //  -> SearchResult 화면 전환
-        
-        /*
-            useCase
-                recentlyKeywordList() -> Observable<[String]>
-         
-            repository
-                recentlyKeywordList() -> Observable<[String]>
-         
-            viewModel
-                Input {
-                    
-                }
-         
-                Output {
-                    recentlyKeyworkdList() -> Obsevable<[String]>
-                }
-         
-            vc.bindViewModel
-                viewModel.transform.recentlyKeywordList.bind(to~ tableview...) {
-                
-                }
-         
-            검색 버튼 선택은..
-            
-         */
-        
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
     
     
     func bindViewModel() {

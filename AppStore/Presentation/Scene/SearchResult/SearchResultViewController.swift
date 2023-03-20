@@ -11,6 +11,7 @@ import RxCocoa
 
 class SearchResultViewController: UIViewController {
     @IBOutlet weak var searchResultTableView: UITableView!
+    weak var parentNavigationController: UINavigationController?
     
     var viewModel = SearchResultViewModel()
     let disposeBag = DisposeBag()
@@ -36,7 +37,6 @@ class SearchResultViewController: UIViewController {
             .subscribe(onNext: { [weak self] result in
                 switch result {
                 case .success(let data):
-//                    print("data: \(data)")
                     self?.searchResultList.onNext(data)
                     break
                 case .failure(let error):
@@ -47,13 +47,19 @@ class SearchResultViewController: UIViewController {
             .disposed(by: disposeBag)
         
         searchResultList.bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchResultCell")) { (index, element, cell) in
-            print("table bind... \(index)")
             if let searchResultCell = cell as? SearchResultCell,
                let info = element as? AppInfo {
-                print("title: \(info.trackName)")
-                searchResultCell.itemInfo = info
+                searchResultCell.viewModel = SearchResultCellViewModel(info: info)
             }
         }.disposed(by: disposeBag)
+        
+        searchResultTableView.rx.modelSelected(RawDataProtocol.self)
+            .subscribe { [weak self] Data in
+                let detailViewController = DetailViewController.storyboardInstantiate()
+//                detailViewController.viewModel = AppDetailViewModel(appData: data)
+                self?.parentNavigationController?.pushViewController(detailViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
  

@@ -38,7 +38,7 @@ extension Scene {
                 return storyboard.instantiateViewController(withIdentifier: "DetailVC")
             }
             
-            detailVC.bind(viewModel: detailViewModel)
+//            detailVC.bind(viewModel: detailViewModel)
             
             return detailVC
         }
