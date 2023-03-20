@@ -10,9 +10,8 @@ import RxSwift
 
 final class SearchUseCase: SearchUseCaseInterface {
     private let searchRepository = SearchRepository()
-    
-    func recentlyKeyworkdList() -> Observable<[String]> {
-        searchRepository.fetchRecentlyKeyworkdList()
+    var recentlyKeyworkdList: ReplaySubject<[String]> {
+        searchRepository.recentlyKeywordList
     }
     
     func save(keyworkd: String) {

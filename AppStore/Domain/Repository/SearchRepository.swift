@@ -9,12 +9,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SearchRepository: SearchRepositoryInterface {
-    
-    @discardableResult
-    func fetchRecentlyKeyworkdList() -> RxSwift.Observable<[String]> {
+class SearchRepository: SearchRepositoryInterface {    
+    var recentlyKeywordList: ReplaySubject<[String]> = ReplaySubject<[String]>.create(bufferSize: 1)
+
+//    @discardableResult
+    func fetchRecentlyKeywordList() {
         let fetchedlist = UserDefaults.standard.object(forKey: "RecntlyKeywordList") as? [String]
-        return Observable.of(fetchedlist ?? [])
+        recentlyKeywordList.onNext(fetchedlist ?? [])
+//        return Observable.of(fetchedlist ?? [])
     }
     
     func save(keyword: String) {
@@ -24,7 +26,7 @@ class SearchRepository: SearchRepositoryInterface {
         }
      
         recentlyKeywordList?.append(keyword)
-        
+        self.recentlyKeywordList.onNext(recentlyKeywordList ?? [])
         UserDefaults.standard.set(recentlyKeywordList, forKey: "RecntlyKeywordList")
     }
 }

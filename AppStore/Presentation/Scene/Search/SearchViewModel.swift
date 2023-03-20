@@ -17,7 +17,7 @@ class SearchViewModel: ViewModelBase {
     }
     
     struct Output {
-        var recentlyKeywordList: Observable<[String]>
+        var recentlyKeywordList: ReplaySubject<[String]>
     }
     
     func transform(input: Input) -> Output {
@@ -26,7 +26,7 @@ class SearchViewModel: ViewModelBase {
         }
         .disposed(by: disposeBag)
         
-        let observable = searchUseCase.recentlyKeyworkdList()
-        return Output(recentlyKeywordList: observable)
+        let publish = searchUseCase.recentlyKeyworkdList
+        return Output(recentlyKeywordList: publish)
     }
 }

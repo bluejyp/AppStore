@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 
 protocol SearchUseCaseInterface {
-    func recentlyKeyworkdList() -> Observable<[String]>
+    var recentlyKeyworkdList: ReplaySubject<[String]> { get }
+//    func recentlyKeyworkdList() -> Observable<[String]>
     func save(keyworkd: String)
 }

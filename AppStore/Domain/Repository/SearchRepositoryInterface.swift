@@ -10,6 +10,8 @@ import RxSwift
 import RxCocoa
 
 protocol SearchRepositoryInterface {
-    func fetchRecentlyKeyworkdList() -> Observable<[String]>
+    var recentlyKeywordList: ReplaySubject<[String]> { get set }
+    
+    func fetchRecentlyKeywordList()
     func save(keyword: String)
 }

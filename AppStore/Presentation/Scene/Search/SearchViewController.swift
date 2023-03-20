@@ -25,7 +25,7 @@ class SearchViewController: UIViewController {
     }()
     
     var viewModel = SearchViewModel()
-    let bag = DisposeBag()
+    let disposeBag = DisposeBag()
     var searchKeyword: PublishSubject<String> = PublishSubject<String>()
     var recentlyKeywordList = PublishSubject<[String]>()
 
@@ -42,14 +42,24 @@ class SearchViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    
     func bindViewModel() {
         let output = viewModel.transform(input: SearchViewModel.Input(keyword: searchKeyword))
+        output.recentlyKeywordList
+            .subscribe { [weak self] keywordList in
+                print("subsc.. \(keywordList)")
+            }
+            .disposed(by: disposeBag)
         
         output.recentlyKeywordList
             .bind(to: recentlyKeywordTableView.rx.items(cellIdentifier: "RecentlyKeywordCell")) { (index, element, cell) in
                 cell.textLabel?.text = element
-            }.disposed(by: bag)
+            }.disposed(by: disposeBag)
+        
+        recentlyKeywordTableView.rx.modelSelected(String.self)
+            .subscribe { [weak self] keyword in
+                self?.searchController.searchBar.text = keyword
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -71,21 +81,23 @@ extension SearchViewController {
             .compactMap { [weak self] in
                 return self?.searchController.searchBar.text
             }.bind(to: searchResultController.searchKeyword)
-            .disposed(by: self.bag)
+            .disposed(by: disposeBag)
         
 //
         searchController.searchBar.rx.searchButtonClicked
             .bind { [weak self] in
 //                self?.viewModel.transform(input: SearchViewModel.Input(keyword: self!.searchKeyword))
                 print("searchButtonClicked bind2")
+                let string = self?.searchController.searchBar.text ?? ""
+                self?.searchKeyword.onNext(string)
             }
-            .disposed(by: self.bag)
+            .disposed(by: disposeBag)
 
         //cancleButton to remove SearchResult
         searchController.searchBar.rx.cancelButtonClicked
             .compactMap{""}
             .bind(to: searchResultController.searchKeyword)
-            .disposed(by: bag)
+            .disposed(by: disposeBag)
             
     //TODO: - SearchBar Delete Button Action 연결하기
     }
