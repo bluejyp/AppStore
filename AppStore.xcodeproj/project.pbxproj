@@ -42,7 +42,7 @@
 		8B6DBD7429C87D92004423BD /* ImageDownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD7329C87D92004423BD /* ImageDownloadRequest.swift */; };
 		8B6DBD7629C8A7E3004423BD /* DetailViewController+ScreenShot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD7529C8A7E3004423BD /* DetailViewController+ScreenShot.swift */; };
 		8B6DBD7829C8A7F9004423BD /* DetailViewController+TitleContents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD7729C8A7F9004423BD /* DetailViewController+TitleContents.swift */; };
-		8B6DBD7A29C8A808004423BD /* DetailViewController+NewFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD7929C8A808004423BD /* DetailViewController+NewFunction.swift */; };
+		8B6DBD7A29C8A808004423BD /* DetailViewController+ReleaseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD7929C8A808004423BD /* DetailViewController+ReleaseInfo.swift */; };
 		8B6DBD7C29C8A818004423BD /* DetailViewController+Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD7B29C8A818004423BD /* DetailViewController+Rating.swift */; };
 		8B6DBD7F29C8A8E3004423BD /* DetailViewController+Developer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD7E29C8A8E3004423BD /* DetailViewController+Developer.swift */; };
 		8B6DBD8129C8A907004423BD /* DetailViewController+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD8029C8A907004423BD /* DetailViewController+Description.swift */; };
@@ -126,7 +126,7 @@
 		8B6DBD7329C87D92004423BD /* ImageDownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloadRequest.swift; sourceTree = "<group>"; };
 		8B6DBD7529C8A7E3004423BD /* DetailViewController+ScreenShot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+ScreenShot.swift"; sourceTree = "<group>"; };
 		8B6DBD7729C8A7F9004423BD /* DetailViewController+TitleContents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+TitleContents.swift"; sourceTree = "<group>"; };
-		8B6DBD7929C8A808004423BD /* DetailViewController+NewFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+NewFunction.swift"; sourceTree = "<group>"; };
+		8B6DBD7929C8A808004423BD /* DetailViewController+ReleaseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+ReleaseInfo.swift"; sourceTree = "<group>"; };
 		8B6DBD7B29C8A818004423BD /* DetailViewController+Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Rating.swift"; sourceTree = "<group>"; };
 		8B6DBD7E29C8A8E3004423BD /* DetailViewController+Developer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Developer.swift"; sourceTree = "<group>"; };
 		8B6DBD8029C8A907004423BD /* DetailViewController+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Description.swift"; sourceTree = "<group>"; };
@@ -372,7 +372,7 @@
 			children = (
 				8B6DBD7729C8A7F9004423BD /* DetailViewController+TitleContents.swift */,
 				8B6DBD7B29C8A818004423BD /* DetailViewController+Rating.swift */,
-				8B6DBD7929C8A808004423BD /* DetailViewController+NewFunction.swift */,
+				8B6DBD7929C8A808004423BD /* DetailViewController+ReleaseInfo.swift */,
 				8B6DBD7529C8A7E3004423BD /* DetailViewController+ScreenShot.swift */,
 				8B6DBD8029C8A907004423BD /* DetailViewController+Description.swift */,
 				8B6DBD7E29C8A8E3004423BD /* DetailViewController+Developer.swift */,
@@ -733,7 +733,7 @@
 				8B46ACC029C608BB00B1AC8C /* SearchReusltModel.swift in Sources */,
 				8B46ACC229C608C800B1AC8C /* AppDetailModel.swift in Sources */,
 				8B46ACBE29C607F100B1AC8C /* DetailViewModel.swift in Sources */,
-				8B6DBD7A29C8A808004423BD /* DetailViewController+NewFunction.swift in Sources */,
+				8B6DBD7A29C8A808004423BD /* DetailViewController+ReleaseInfo.swift in Sources */,
 				8B62EAB329C6DDBB00749D50 /* SearchUseCaseInterface.swift in Sources */,
 				8B46ACBC29C607E500B1AC8C /* SearchResultViewModel.swift in Sources */,
 				8BFB8D8629C614E6001CB9FB /* ViewModelBase.swift in Sources */,

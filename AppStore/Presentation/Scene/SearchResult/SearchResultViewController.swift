@@ -21,16 +21,10 @@ class SearchResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         bindViewModel()
     }
     
-    func configureUI() {
-//        searchResultTableView.rx.transform()
-    }
-    
-    func bindViewModel() {
+    private func bindViewModel() {
         let output = viewModel.transform(input: SearchResultViewModel.Input(keyword: searchKeyword))
         
         output.recentlyKeywordList.observe(on: MainScheduler.instance)
@@ -51,15 +45,23 @@ class SearchResultViewController: UIViewController {
                let info = element as? AppInfo {
                 searchResultCell.viewModel = SearchResultCellViewModel(info: info)
             }
-        }.disposed(by: disposeBag)
+        }
+        .disposed(by: disposeBag)
         
         searchResultTableView.rx.modelSelected(RawDataProtocol.self)
-            .subscribe { [weak self] Data in
-                let detailViewController = DetailViewController.storyboardInstantiate()
-//                detailViewController.viewModel = AppDetailViewModel(appData: data)
-                self?.parentNavigationController?.pushViewController(detailViewController, animated: true)
+            .subscribe { [weak self] data in
+                if let info = data.element as? AppInfo {
+                    self?.presentDetailViewController(info: info)
+                }
             }
             .disposed(by: disposeBag)
+    }
+    
+    private func presentDetailViewController(info: AppInfo) {
+        let detailViewController = DetailViewController.storyboardInstantiate()
+        detailViewController.viewModel = DetailViewModel(info: info)
+        
+        parentNavigationController?.pushViewController(detailViewController, animated: true)
     }
 }
  

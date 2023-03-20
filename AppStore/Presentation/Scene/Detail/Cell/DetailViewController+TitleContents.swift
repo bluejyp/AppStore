@@ -9,6 +9,11 @@ import Foundation
 
 extension DetailViewController {
     func updateTitleContents() {
+        titleLabel.text = viewModel?.trackName
+        subTitleLabel.text = viewModel?.subtitle
         
+        if let imageUrl = viewModel?.icon512ImageUrlString {
+            iconImageView.setImage(urlStrig: imageUrl)
+        }
     }
 }

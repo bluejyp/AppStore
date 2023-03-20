@@ -14,7 +14,7 @@ struct SearchResponseModel: Codable {
 
 public struct AppInfo: RawDataProtocol {
     var artworkUrl60: String?
-    var artworkUrl512: String?
+    var artworkUrl512: String
     var artworkUrl100: String
     var screenshotUrls: [String]?
     var supportedDevices: [String]?

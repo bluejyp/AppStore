@@ -10,7 +10,7 @@ import Foundation
 final class SearchResultCellViewModel {
     let appInfo: AppInfo
     
-    init(info:AppInfo) {
+    init(info: AppInfo) {
         appInfo = info
     }
     var title: String {

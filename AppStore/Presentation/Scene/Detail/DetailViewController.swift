@@ -10,7 +10,7 @@ import UIKit
 enum DetailTableRowInfo: Int {
     case titleContents = 0
     case rating
-    case newFunction
+    case releaseInfo
     case screenshot
     case description
     case developer
@@ -27,13 +27,22 @@ class DetailViewController: UITableViewController {
     @IBOutlet weak var downloadButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     
-    // NewFunction Cell
-    @IBOutlet weak var newFunctionTitleLabel: UILabel!
-    @IBOutlet weak var versionButton: UIButton!
-    @IBOutlet weak var versionLabel: UILabel!
-    @IBOutlet weak var updateDateLabel: UILabel!
+    // Rating Cell
+    @IBOutlet weak var ratingCountLabel: UILabel!
+    @IBOutlet weak var ratingValueLabel: UILabel!
+    @IBOutlet weak var ratingAgeLabel: UILabel!
+    @IBOutlet weak var ratingChartValueLabel: UILabel!
+    @IBOutlet weak var ratingCompnayLabel: UILabel!
+    @IBOutlet weak var ratingLanguageLabel: UILabel!
+    @IBOutlet weak var ratingLanguageInfoLabel: UILabel!
+    
+    // ReleaseInfo Cell
+    @IBOutlet weak var releaseNoteTitleLabel: UILabel!
+    @IBOutlet weak var releaseVersionButton: UIButton!
+    @IBOutlet weak var releaseVersionLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var releaseNoteLabel: UILabel!
-    @IBOutlet weak var newMoreButton: UIButton!
+    @IBOutlet weak var releaseNoteMoreButton: UIButton!
     
     // screenShot Cell
     @IBOutlet weak var screenShotStackView: UIStackView!
@@ -46,29 +55,26 @@ class DetailViewController: UITableViewController {
     @IBOutlet weak var companyLabel: UILabel!
     @IBOutlet weak var developerLabel: UILabel!
     
-    var viewModel: DetailViewModel? {
-        didSet {
-            updateTitleContents()
-            updateNewFunction()
-            updateScreenshot()
-            updateDescription()
-            updateDeveloper()
-        }
-    }
+    var viewModel: DetailViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         navigationController?.navigationBar.prefersLargeTitles = false
+        configureUI()
+    }
+    
+    private func configureUI() {
+        updateTitleContents()
+        updateNewFunction()
+        updateScreenshot()
+        updateDescription()
+        updateDeveloper()
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == DetailTableRowInfo.description.rawValue {
-//            return 500
-        }
-        
-        return super.tableView(tableView, heightForRowAt: indexPath)
+        return UITableView.automaticDimension
     }
 }
 
