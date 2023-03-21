@@ -9,31 +9,37 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SearchRepository: SearchRepositoryInterface {    
-    var recentlyKeywordList: BehaviorRelay<[String]>
+class SearchRepository: SearchRepositoryInterface {
+    private let KEYWORD_HISTORY = "KeywordHistory"
+    var keywordHistory: BehaviorRelay<[String]>
     
     init() {
-        let fetchedlist = UserDefaults.standard.object(forKey: "RecntlyKeywordList") as? [String]
-        recentlyKeywordList = BehaviorRelay<[String]>(value: fetchedlist ?? [])
+        let fetchedlist = UserDefaults.standard.object(forKey: KEYWORD_HISTORY) as? [String]
+        keywordHistory = BehaviorRelay<[String]>(value: fetchedlist ?? [])
     }
 
-    func fetchRecentlyKeywordList() {
-        let fetchedlist = UserDefaults.standard.object(forKey: "RecntlyKeywordList") as? [String]
-        recentlyKeywordList.accept(fetchedlist ?? [])
-//        onNext(fetchedlist ?? [])
-//        return Observable.of(fetchedlist ?? [])
+    func fetchKeywordHistory() {
+        let fetchedlist = UserDefaults.standard.object(forKey: KEYWORD_HISTORY) as? [String]
+        keywordHistory.accept(fetchedlist ?? [])
     }
     
     func save(keyword: String) {
-        var recentlyKeywordList = UserDefaults.standard.object(forKey: "RecntlyKeywordList") as? [String]
-        if recentlyKeywordList == nil {
-            recentlyKeywordList = [String]()
-        }
-     
-        recentlyKeywordList?.append(keyword)
+        guard keyword.count > 0 else { return }
         
-        self.recentlyKeywordList.accept(recentlyKeywordList ?? [])
-//        self.recentlyKeywordList.onNext(recentlyKeywordList ?? [])
-        UserDefaults.standard.set(recentlyKeywordList, forKey: "RecntlyKeywordList")
+        var historyList = UserDefaults.standard.object(forKey: KEYWORD_HISTORY) as? [String]
+        
+        if historyList == nil {
+            historyList = [String]()
+        }
+        
+        if let historyList = historyList,
+            historyList.contains(keyword) {
+            // 최근 검색어 목록에 이미 존재하는 경우
+            return
+        }
+        
+        historyList?.append(keyword)
+        UserDefaults.standard.set(historyList, forKey: KEYWORD_HISTORY)
+        keywordHistory.accept(historyList ?? [])
     }
 }

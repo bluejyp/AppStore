@@ -15,7 +15,26 @@ class DetailViewModel {
     }
     
     
+}
+
+// title
+extension DetailViewModel {
+    var icon512ImageUrlString: String {
+        appInfo.artworkUrl512
+    }
     
+    var trackName: String {
+        appInfo.trackName
+    }
+    
+    var subtitle: String {
+        appInfo.genres?.first ?? ""
+    }
+}
+
+
+// rating
+extension DetailViewModel {
     var rating: Double {
         Double(appInfo.averageUserRatingForCurrentVersion ?? 0)
     }
@@ -28,24 +47,38 @@ class DetailViewModel {
         return String(format:"%0.0f", count)
     }
     
+    var trackContentRating: String? {
+        appInfo.trackContentRating
+    }
     
-
+    var genre: String? {
+        appInfo.genres?.first
+    }
     
+    var supportLanguage: String? {
+        appInfo.languageCodesISO2A?.first ?? "KO"
+    }
+    
+    var language: String? {
+        guard let languages = appInfo.languageCodesISO2A else {
+            return ""
+        }
+        
+        if languages.count > 1 {
+            let count = languages.count - 1
+            if count > 0 {
+                return "+\(count)개 언어"
+            }
+        } else {
+            let locale = NSLocale(localeIdentifier: "KO")
+            let code = languages.first ?? "KO"
+            return locale.displayName(forKey: .identifier, value: code) ?? ""
+        }
+        
+        return ""
+    }
 }
 
-extension DetailViewModel {
-    var icon512ImageUrlString: String {
-        appInfo.artworkUrl512
-    }
-    
-    var trackName: String {
-        appInfo.trackName ?? ""
-    }
-    
-    var subtitle: String {
-        appInfo.genres?.first ?? ""
-    }
-}
 
 extension DetailViewModel {
     var version: String? {
@@ -53,7 +86,21 @@ extension DetailViewModel {
     }
     
     var releaseDate: String? {
-        appInfo.releaseDate
+        guard let currentReleaseDate = appInfo.currentVersionReleaseDate else {
+            return appInfo.currentVersionReleaseDate
+        }
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        guard let date = dateFormatter.date(from: currentReleaseDate) else {
+            return currentReleaseDate
+        }
+        
+        dateFormatter.dateFormat = "yyyy년 M월"
+        
+        return dateFormatter.string(from: date)
     }
     
     var releaseNote: String? {

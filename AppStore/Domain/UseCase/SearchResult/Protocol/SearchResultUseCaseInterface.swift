@@ -13,7 +13,7 @@ protocol RawDataProtocol: Codable {
 }
 
 enum SearchError: Error {
-    case keywordError
+    case EmptyKeywordError
     case parsingError
     case responseError
     case mockdataError

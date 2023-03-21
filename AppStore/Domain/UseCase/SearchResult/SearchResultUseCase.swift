@@ -10,7 +10,7 @@ import RxSwift
 
 class SearchResultUseCase: SearchResultUseCaseInterface {
     func searchResultList(keyword: String) -> Observable<SearchResult> {
-        let request = SearchAppListConfig(keyworkd: keyword).request()
+        let request = SearchResultConfigurable(keyworkd: keyword).request()
         
         return NetworkService.shared.requestSend(request: request).map { result -> SearchResult in
             switch result {
@@ -19,7 +19,7 @@ class SearchResultUseCase: SearchResultUseCaseInterface {
                     do {
                         let model = try JSONDecoder().decode(SearchResponseModel.self, from: resultData)
                         return SearchResult.success(model.results ?? [])
-                    }catch let error {
+                    } catch let error {
                         print("error = \(error)")
                         return SearchResult.failure(.parsingError)
                     }

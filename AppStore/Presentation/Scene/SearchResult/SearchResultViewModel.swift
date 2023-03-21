@@ -30,8 +30,9 @@ class SearchResultViewModel: ViewModelBase {
                 }
                 
                 guard keyword.count > 0 else {
-                    return .just(SearchResult.failure(.keywordError))
+                    return .just(SearchResult.failure(.EmptyKeywordError))
                 }
+                
                 return self.searchResultUseCase.searchResultList(keyword: keyword)
             }
         

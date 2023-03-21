@@ -10,7 +10,6 @@ import RxSwift
 import RxCocoa
 
 protocol SearchUseCaseInterface {
-    var recentlyKeyworkdList: BehaviorRelay<[String]> { get }
-//    func recentlyKeyworkdList() -> Observable<[String]>
+    var keywordHistory: BehaviorRelay<[String]> { get }
     func save(keyworkd: String)
 }

@@ -11,7 +11,7 @@ import RxCocoa
 
 class SearchResultViewController: UIViewController {
     @IBOutlet weak var searchResultTableView: UITableView!
-    @IBOutlet weak var searchKeywordTableView: UITableView!
+    @IBOutlet weak var filteredHistoryTableView: UITableView!
     weak var parentNavigationController: UINavigationController?
     
     var viewModel = SearchResultViewModel()
@@ -23,18 +23,8 @@ class SearchResultViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         bindViewModel()
-        /*
-            - hidden 조건
-                searchAPI request시 hidden
-                cancel눌렀을 때 알빠노
-                필터 결과물이 없으면 hidden
-         
-            - show 조건
-                searchBar 텍스트가 변경되면 show     X
-                
-         
-         */
     }
     
     private func bindViewModel() {
@@ -44,36 +34,49 @@ class SearchResultViewController: UIViewController {
             .subscribe(onNext: { [weak self] result in
                 switch result {
                 case .success(let data):
+                    print("##### searchResult isHidden2222: true")
+                    self?.filteredHistoryTableView.isHidden = true
                     self?.searchResultList.onNext(data)
                     break
                 case .failure(let error):
                     print("error: \(error)")
+                    if error == .EmptyKeywordError {
+                        self?.searchResultList.onNext([])
+                    }
                     break
                 }
             })
             .disposed(by: disposeBag)
         
         filteredKeywordHistory
-            .subscribe { history in
-                self.searchKeywordTableView.isHidden = history.count == 0
-                print("searchResult:: \(history)")
+            .subscribe { [weak self] history in
+                print("##### searchResult isHidden: \(history.count == 0)")
+                self?.searchResultList.onNext([])
+                self?.filteredHistoryTableView.isHidden = history.count == 0
         }
         .disposed(by: disposeBag)
         
         filteredKeywordHistory
-            .bind(to: searchKeywordTableView.rx.items(cellIdentifier: "filterdHistoryCell")) { (index, element, cell) in
-                cell.textLabel?.text = element
+            .bind(to: filteredHistoryTableView.rx.items(cellIdentifier: "FilteredHistoryCell")) { (index, element, cell) in
+                guard let filteredHistoryCell = cell as? FilteredHistoryCell else {
+                    return
+                }
+                
+                filteredHistoryCell.keywordLabel.text = element
             }
             .disposed(by: disposeBag)
+        
         
         searchResultList.bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchResultCell")) { (index, element, cell) in
             if let searchResultCell = cell as? SearchResultCell,
                let info = element as? AppInfo {
+                print("item:: \(info)")
                 searchResultCell.viewModel = SearchResultCellViewModel(info: info)
             }
         }
         .disposed(by: disposeBag)
         
+        // 최근 검색어 선택 시
         searchResultTableView.rx.modelSelected(RawDataProtocol.self)
             .subscribe { [weak self] data in
                 if let info = data.element as? AppInfo {

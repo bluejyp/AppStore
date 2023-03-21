@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SearchAppListConfig: NetworkConfigurable {
+final class SearchResultConfigurable: NetworkConfigurable {
     typealias ParamModelType = SearchInfo
     var path: String
     var query: [String : Any]? = [:]

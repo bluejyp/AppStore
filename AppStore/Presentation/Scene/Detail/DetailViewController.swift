@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Cosmos
 
 enum DetailTableRowInfo: Int {
     case titleContents = 0
@@ -30,6 +31,7 @@ class DetailViewController: UITableViewController {
     // Rating Cell
     @IBOutlet weak var ratingCountLabel: UILabel!
     @IBOutlet weak var ratingValueLabel: UILabel!
+    @IBOutlet weak var ratingContainerView: UIView!
     @IBOutlet weak var ratingAgeLabel: UILabel!
     @IBOutlet weak var ratingChartValueLabel: UILabel!
     @IBOutlet weak var ratingCompnayLabel: UILabel!
@@ -56,17 +58,38 @@ class DetailViewController: UITableViewController {
     @IBOutlet weak var developerLabel: UILabel!
     
     var viewModel: DetailViewModel?
+    lazy var cosmosRatingView: CosmosView = {
+        let cosmos = CosmosView()
+        cosmos.frame = CGRect(x: 0, y: 0,
+                                  width: ratingContainerView.frame.size.width,
+                                  height: ratingContainerView.frame.size.height)
+        cosmos.settings.updateOnTouch = false
+        cosmos.settings.emptyBorderColor = UIColor.darkGray
+        cosmos.settings.totalStars = 5
+        cosmos.settings.starSize = 10
+        cosmos.settings.fillMode = .full
+        cosmos.settings.filledBorderColor = UIColor.darkGray
+        cosmos.settings.filledColor = UIColor.darkGray
+        ratingContainerView.addSubview(cosmos)
+ 
+        return cosmos
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configureUI()
     }
     
     private func configureUI() {
         updateTitleContents()
+        updateRating()
         updateNewFunction()
         updateScreenshot()
         updateDescription()

@@ -45,14 +45,16 @@ class SearchViewController: UIViewController {
     }
     
     func bindViewModel() {
-        let output = viewModel.transform(input: SearchViewModel.Input(keyword: searchKeyword, currneyKeyword: currentKeyword))
+        let output = viewModel.transform(input: SearchViewModel.Input(keyword: searchKeyword, currentKeyword: currentKeyword))
 
         output.recentlyKeywordList
-            .bind(to: recentlyKeywordTableView.rx.items(cellIdentifier: "RecentlyKeywordCell")) { (index, element, cell) in
-                cell.textLabel?.text = element
+            .bind(to: recentlyKeywordTableView.rx.items(cellIdentifier: "KeywordHistoryCell")) { (index, element, cell) in
+                if let keywordHistoryCell = cell as? KeywordHistoryCell {
+                    keywordHistoryCell.keywordLabel.text = element
+                }
             }.disposed(by: disposeBag)
         
-        output.filterHistory
+        output.filteredKeyWordHistory
             .bind(to: searchResultController.filteredKeywordHistory)
             .disposed(by: disposeBag)
             
@@ -70,7 +72,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     private func configureUI() {
         
-        self.navigationItem.title = "Search"
+        self.navigationItem.title = "검색"
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -80,38 +82,34 @@ extension SearchViewController {
     }
     
     fileprivate func bindingSearchView() {
+        // 검색 시작 시 SearchResultViewController에 키워드 전달
         searchController.searchBar.rx.searchButtonClicked
             .compactMap { [weak self] in
                 return self?.searchController.searchBar.text
             }.bind(to: searchResultController.searchKeyword)
             .disposed(by: disposeBag)
         
-//
+        // 검색어를 스토리지에 저장
         searchController.searchBar.rx.searchButtonClicked
             .bind { [weak self] in
-//                self?.viewModel.transform(input: SearchViewModel.Input(keyword: self!.searchKeyword))
-                print("searchButtonClicked bind2")
                 let string = self?.searchController.searchBar.text ?? ""
                 self?.searchKeyword.onNext(string)
             }
             .disposed(by: disposeBag)
 
+        // 서치바 text가 변경될 때
         searchController.searchBar.rx.text
-            .debounce(.milliseconds(1000), scheduler: MainScheduler.instance)
+//            .debounce(.milliseconds(1000), scheduler: MainScheduler.instance)
             .subscribe { [weak self] keyword in
-            
-            guard let self = self else { return }
-            self.currentKeyword.onNext(keyword ?? "")
+            self?.currentKeyword.onNext(keyword ?? "")
         }
         .disposed(by: disposeBag)
-        
-        //cancleButton to remove SearchResult
+
+        // 캔슬버튼 선택 시
         searchController.searchBar.rx.cancelButtonClicked
             .compactMap{""}
             .bind(to: searchResultController.searchKeyword)
             .disposed(by: disposeBag)
-            
-    //TODO: - SearchBar Delete Button Action 연결하기
     }
 
 }
