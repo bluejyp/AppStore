@@ -17,19 +17,16 @@ class ImageDownloadUseCase: ImageDownloadUseCaseInterface {
     private var cache = NSCache<NSString,UIImage>()
     private let cachePath = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     private let fileManager = FileManager.default
-    // 캐쉬 정책.
-    private var cachPolicy: CachePolicy = .disk_cache
+
     private var cancelList: [String : Cancellable] = [:]
     
     private init() {
-//        removeAllImage()
+
     }
-    ///   정책에 따라 Memory , Disk 순으로 탐색해서 Cache된 이미지를 반환합니다.
     /// - Parameter key: Image URL String
     /// - Returns: Cached Image (Null Able)
     private func loadImage(_ key: String) -> UIImage? {
         guard let image = cache.object(forKey: key as NSString) else {
-            if cachPolicy == .memory_only { return nil}
             return getImage_File(key)
         }
         return image
@@ -41,9 +38,7 @@ class ImageDownloadUseCase: ImageDownloadUseCaseInterface {
     ///   - image:  wnloaded Image
     private func addImage(_ key: String, image: UIImage) {
         cache.setObject(image, forKey: key as NSString)
-        if cachPolicy == .disk_cache {
-            addImage_File(key, image)
-        }
+        addImage_File(key, image)
     }
     
     ///  삭제는 둘다 진행합니다.. 정책이 변경될떄 남아 있지 않도록 하기 위함.
@@ -59,7 +54,7 @@ class ImageDownloadUseCase: ImageDownloadUseCaseInterface {
         removeAllImage_File()
     }
     
-    //MARK: - FileCache
+    // MARK: - FileCache
     
     ///   File Path 에 이미지를 저장된 이미지를 반환합니다.
     /// - Parameter key: image URL String
@@ -81,13 +76,14 @@ class ImageDownloadUseCase: ImageDownloadUseCaseInterface {
             guard let data = image.jpegData(compressionQuality: 1) ?? image.pngData() else {
                 return
             }
+            
             if fileManager.fileExists(atPath: cachePath.path) == false {
                 try fileManager.createDirectory(at: cachePath, withIntermediateDirectories: true)
             }
             
             try data.write(to: filePath(key),options: .atomic)
-        }catch {
-            print("error \(error)")
+        } catch {
+            
         }
     }
     
@@ -132,13 +128,11 @@ extension ImageDownloadUseCase {
             switch result {
             case .success(let data):
                 if let downloadData = data , let image = UIImage(data: downloadData){
-                    print("download Complete - \(downloadData.count) byte")
                     complete(image)
                     self?.addImage(urlString, image: image)
                     self?.cancelTask(key: urlString)
                 }
-            case .failure(let error):
-                print("image error = \(error)")
+            case .failure(_):
                 complete(nil)
                 self?.cancelTask(key: urlString)
             }

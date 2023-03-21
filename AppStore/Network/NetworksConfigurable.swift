@@ -98,13 +98,12 @@ extension NetworkConfigurable {
             }
         }
         catch {
-            print("error")
+            
         }
         return nil
     }
     
     func request() -> URLRequest {
-        print("serviceURL - \(serviceURL)")
         switch method {
         case .get:
             return requestGet()
@@ -165,7 +164,6 @@ extension ImageDownloadConfigurable {
     }
     
     func downloadRequest() -> URLRequest {
-        print("downloadURL - \(imageURLString)")
         let urlComponets = URLComponents(string: imageURLString)
         guard let requestURL = urlComponets?.url else{
             fatalError("rquest send Fail")

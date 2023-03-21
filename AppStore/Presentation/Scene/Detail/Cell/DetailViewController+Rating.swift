@@ -7,15 +7,6 @@
 
 import Foundation
 
-//@IBOutlet weak var ratingCountLabel: UILabel!
-//@IBOutlet weak var ratingValueLabel: UILabel!
-//@IBOutlet weak var ratingContainerView: UIView!
-//@IBOutlet weak var ratingAgeLabel: UILabel!
-//@IBOutlet weak var ratingChartValueLabel: UILabel!
-//@IBOutlet weak var ratingCompnayLabel: UILabel!
-//@IBOutlet weak var ratingLanguageLabel: UILabel!
-//@IBOutlet weak var ratingLanguageInfoLabel: UILabel!
-
 extension DetailViewController {
     func updateRating() {
         let ratingCount = viewModel?.ratingCount ?? "0"

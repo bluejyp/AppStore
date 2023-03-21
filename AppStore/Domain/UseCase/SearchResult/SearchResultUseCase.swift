@@ -19,15 +19,13 @@ class SearchResultUseCase: SearchResultUseCaseInterface {
                     do {
                         let model = try JSONDecoder().decode(SearchResponseModel.self, from: resultData)
                         return SearchResult.success(model.results ?? [])
-                    } catch let error {
-                        print("error = \(error)")
+                    } catch {
                         return SearchResult.failure(.parsingError)
                     }
                 } else {
                     return SearchResult.success([])
                 }
-            case .failure(let error):
-                print("error \(error)")
+            case .failure(_):
                 return SearchResult.failure(.responseError)
             }
         }

@@ -34,12 +34,10 @@ class SearchResultViewController: UIViewController {
             .subscribe(onNext: { [weak self] result in
                 switch result {
                 case .success(let data):
-                    print("##### searchResult isHidden2222: true")
                     self?.filteredHistoryTableView.isHidden = true
                     self?.searchResultList.onNext(data)
                     break
                 case .failure(let error):
-                    print("error: \(error)")
                     if error == .EmptyKeywordError {
                         self?.searchResultList.onNext([])
                     }
@@ -50,9 +48,11 @@ class SearchResultViewController: UIViewController {
         
         filteredKeywordHistory
             .subscribe { [weak self] history in
-                print("##### searchResult isHidden: \(history.count == 0)")
-                self?.searchResultList.onNext([])
                 self?.filteredHistoryTableView.isHidden = history.count == 0
+                
+                if history.count == 0 {
+                    self?.searchResultList.onNext([])
+                }
         }
         .disposed(by: disposeBag)
         
@@ -70,7 +70,6 @@ class SearchResultViewController: UIViewController {
         searchResultList.bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchResultCell")) { (index, element, cell) in
             if let searchResultCell = cell as? SearchResultCell,
                let info = element as? AppInfo {
-                print("item:: \(info)")
                 searchResultCell.viewModel = SearchResultCellViewModel(info: info)
             }
         }

@@ -22,6 +22,7 @@ enum DetailTableRowInfo: Int {
 }
 
 class DetailViewController: UITableViewController {
+    // title
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var subTitleLabel: UILabel!
@@ -90,7 +91,7 @@ class DetailViewController: UITableViewController {
     private func configureUI() {
         updateTitleContents()
         updateRating()
-        updateNewFunction()
+        updateReleaseInfo()
         updateScreenshot()
         updateDescription()
         updateDeveloper()
