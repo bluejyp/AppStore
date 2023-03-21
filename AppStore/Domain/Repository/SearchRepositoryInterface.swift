@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol SearchRepositoryInterface {
-    var recentlyKeywordList: ReplaySubject<[String]> { get set }
+    var recentlyKeywordList: BehaviorRelay<[String]> { get set }
     
     func fetchRecentlyKeywordList()
     func save(keyword: String)

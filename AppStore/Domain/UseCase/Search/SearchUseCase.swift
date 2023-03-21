@@ -7,10 +7,11 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 final class SearchUseCase: SearchUseCaseInterface {
     private let searchRepository = SearchRepository()
-    var recentlyKeyworkdList: ReplaySubject<[String]> {
+    var recentlyKeyworkdList: BehaviorRelay<[String]> {
         searchRepository.recentlyKeywordList
     }
     

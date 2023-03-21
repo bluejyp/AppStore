@@ -7,9 +7,10 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 protocol SearchUseCaseInterface {
-    var recentlyKeyworkdList: ReplaySubject<[String]> { get }
+    var recentlyKeyworkdList: BehaviorRelay<[String]> { get }
 //    func recentlyKeyworkdList() -> Observable<[String]>
     func save(keyworkd: String)
 }

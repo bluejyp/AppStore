@@ -10,12 +10,17 @@ import RxSwift
 import RxCocoa
 
 class SearchRepository: SearchRepositoryInterface {    
-    var recentlyKeywordList: ReplaySubject<[String]> = ReplaySubject<[String]>.create(bufferSize: 1)
+    var recentlyKeywordList: BehaviorRelay<[String]>
+    
+    init() {
+        let fetchedlist = UserDefaults.standard.object(forKey: "RecntlyKeywordList") as? [String]
+        recentlyKeywordList = BehaviorRelay<[String]>(value: fetchedlist ?? [])
+    }
 
-//    @discardableResult
     func fetchRecentlyKeywordList() {
         let fetchedlist = UserDefaults.standard.object(forKey: "RecntlyKeywordList") as? [String]
-        recentlyKeywordList.onNext(fetchedlist ?? [])
+        recentlyKeywordList.accept(fetchedlist ?? [])
+//        onNext(fetchedlist ?? [])
 //        return Observable.of(fetchedlist ?? [])
     }
     
@@ -26,7 +31,9 @@ class SearchRepository: SearchRepositoryInterface {
         }
      
         recentlyKeywordList?.append(keyword)
-        self.recentlyKeywordList.onNext(recentlyKeywordList ?? [])
+        
+        self.recentlyKeywordList.accept(recentlyKeywordList ?? [])
+//        self.recentlyKeywordList.onNext(recentlyKeywordList ?? [])
         UserDefaults.standard.set(recentlyKeywordList, forKey: "RecntlyKeywordList")
     }
 }

@@ -18,7 +18,7 @@ class SearchResultViewModel: ViewModelBase {
     }
 
     struct Output {
-        var recentlyKeywordList: Observable<SearchResult>
+        var searchResultList: Observable<SearchResult>
     }
 
     func transform(input: Input) -> Output {
@@ -35,6 +35,6 @@ class SearchResultViewModel: ViewModelBase {
                 return self.searchResultUseCase.searchResultList(keyword: keyword)
             }
         
-        return Output(recentlyKeywordList: result)
+        return Output(searchResultList: result)
     }
 }
