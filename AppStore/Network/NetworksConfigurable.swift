@@ -45,7 +45,7 @@ extension NetworkConfigurable {
         return .https
     }
     
-    var host: String{
+    var host: String {
         return scheme.rawValue + "itunes.apple.com"
     }
     
@@ -77,7 +77,7 @@ extension NetworkConfigurable {
         }
         return query.map {
             let key = "\($0)".addingPercentEncoding(withAllowedCharacters:.urlQueryAllowed) ?? ""
-            let value = "\($1)"//.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+            let value = "\($1)"
             return key + "=" + value
         }
         .joined(separator: "&")
@@ -89,8 +89,8 @@ extension NetworkConfigurable {
             if let model = paramModel {
                 let paramData = try JSONEncoder().encode(model)
                 return paramData
-            }else{
-                guard let query = query else{
+            } else {
+                guard let query = query else {
                     return nil
                 }
                 let paramData = try JSONSerialization.data(withJSONObject: query, options:[])
@@ -118,23 +118,22 @@ extension NetworkConfigurable {
         if let queryItems = queryItems {
             urlComponets?.queryItems = queryItems
         }
-        guard let components = urlComponets , let requestURL = components.url else{
+        guard let components = urlComponets, let requestURL = components.url else{
             fatalError("rquest send Fail")
         }
-        print("compnents - \(components)")
+
         var urlRequest = URLRequest(url: requestURL)
         urlRequest.httpMethod = method.rawValue
         urlRequest.allHTTPHeaderFields = header
         urlRequest.cachePolicy = cachePolicy
-        //https://itunes.apple.com/search?entity=software&term=%EC%B9%B4%EC%B9%B4%EC%98%A4&limit=15
-        //https://itunes.apple.com/search?term=%25EC%25B9%25B4%25EC%25B9%25B4%25EC%2598%25A4&limit=15&entity=software
+
         return urlRequest
     }
     
     private func requestBody() -> URLRequest {
         let urlComponets = URLComponents(string: serviceURL)
    
-        guard let requestURL = urlComponets?.url else{
+        guard let requestURL = urlComponets?.url else {
             fatalError("rquest send Fail")
         }
         var urlRequest = URLRequest(url: requestURL)
@@ -145,12 +144,7 @@ extension NetworkConfigurable {
             urlRequest.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             urlRequest.addValue(String(data.count), forHTTPHeaderField: "Content-Length")
         }
-        //        if let data = paramData {
-        //// Post Man으로 확인해본 결과 itune 는 application/josn 타입으로 응답이 안됨.
-        //            urlRequest.httpBody = data
-        //            urlRequest.addValue(String(data.count), forHTTPHeaderField: "Content-Length")
-        //            urlRequest.addValue("application/json", forHTTPHeaderField: "Accept")
-        //        }
+
         urlRequest.httpMethod = method.rawValue
         urlRequest.cachePolicy = cachePolicy
         return urlRequest
@@ -163,7 +157,6 @@ protocol ImageDownloadConfigurable: NetworkConfigurable {
 }
 
 extension ImageDownloadConfigurable {
-    
     var query: [String : Any]? {
         return [:]
     }

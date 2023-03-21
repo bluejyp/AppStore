@@ -20,8 +20,7 @@ final class SearchAppListConfig: NetworkConfigurable {
             return
         }
         self.query?["term"] = keyworkd.trimmingCharacters(in: .whitespaces)
-        //        query["country"] = NSLocale.current.regionCode ?? "KR"
-        self.query?["country"] = "KR"//검색결과를 확인하기 좋게 하기 위해서 KR로 고정.
+        self.query?["country"] = "KR"
         self.query?["limit"] = 15
         self.query?["entity"] = "software"
     }
@@ -47,8 +46,7 @@ struct SearchInfo: Codable {
     
     init(term: String) {
         self.term =  term.trimmingCharacters(in: .whitespaces).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-//        self.country =  NSLocale.current.regionCode ?? "KR"
-        self.country = "KR"//검색결과를 확인하기 좋게 하기 위해서 KR로 고정.
+        self.country = "KR"
         self.limit = 15
         self.entity = "software"
     }

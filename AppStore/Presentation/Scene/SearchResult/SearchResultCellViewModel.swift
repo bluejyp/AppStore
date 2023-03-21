@@ -14,7 +14,7 @@ final class SearchResultCellViewModel {
         appInfo = info
     }
     var title: String {
-        appInfo.trackName ?? ""
+        appInfo.trackName
     }
     
     var subtitle: String {
@@ -68,10 +68,5 @@ final class SearchResultCellViewModel {
 
         return screenShoutUrls[2]
         
-    }
-    
-    func imageKeyPath(url: URL) -> String {
-        ""
-//        return saveKeyPath(rootKey: appInfo.rootKey(), url: url)
     }
 }

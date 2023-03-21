@@ -159,7 +159,6 @@ extension ImageDownloadUseCase {
     func cancelTask(key: String) {
         DispatchQueue.main.async {
             if let task = self.cancelList[key] {
-//                print("cancleKey = \(key )")
                 task.cancel()
                 self.cancelList.removeValue(forKey: key)
             }

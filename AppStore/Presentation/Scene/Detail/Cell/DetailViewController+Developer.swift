@@ -9,6 +9,7 @@ import Foundation
 
 extension DetailViewController {
     func updateDeveloper() {
-        
+        companyLabel.text = viewModel?.sellerName
+        developerLabel.text = "개발자"
     }
 }

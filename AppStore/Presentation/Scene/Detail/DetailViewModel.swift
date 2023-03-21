@@ -69,12 +69,16 @@ extension DetailViewModel {
 
 
 extension DetailViewModel {
-    
+    var description: String? {
+        appInfo.description
+    }
 }
 
 
 extension DetailViewModel {
-    
+    var sellerName: String? {
+        appInfo.sellerName
+    }
 }
 
 

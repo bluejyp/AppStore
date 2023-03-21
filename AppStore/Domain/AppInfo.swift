@@ -33,7 +33,7 @@ public struct AppInfo: RawDataProtocol {
     var bundleId: String?
     var releaseDate: String?
     var trackId: Float?
-    var trackName: String?
+    var trackName: String
     var sellerName: String?
     var primaryGenreName: String?
     var genreIds: [String]?
@@ -41,7 +41,7 @@ public struct AppInfo: RawDataProtocol {
     var currentVersionReleaseDate: String?
     var z: Double?
     var currency: String?
-    var version: String?
+    var version: String
     var wrapperType: String?
     var artistId: Double?
     var artistName: String?

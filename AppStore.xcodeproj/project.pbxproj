@@ -24,8 +24,6 @@
 		8B46ACBA29C6078D00B1AC8C /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46ACB929C6078D00B1AC8C /* SearchViewModel.swift */; };
 		8B46ACBC29C607E500B1AC8C /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46ACBB29C607E500B1AC8C /* SearchResultViewModel.swift */; };
 		8B46ACBE29C607F100B1AC8C /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46ACBD29C607F100B1AC8C /* DetailViewModel.swift */; };
-		8B46ACC029C608BB00B1AC8C /* SearchReusltModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46ACBF29C608BB00B1AC8C /* SearchReusltModel.swift */; };
-		8B46ACC229C608C800B1AC8C /* AppDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46ACC129C608C800B1AC8C /* AppDetailModel.swift */; };
 		8B46ACC829C6095E00B1AC8C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46ACC729C6095E00B1AC8C /* SearchViewController.swift */; };
 		8B46ACCA29C6096D00B1AC8C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46ACC929C6096D00B1AC8C /* DetailViewController.swift */; };
 		8B46ACCC29C609D200B1AC8C /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B46ACCB29C609D200B1AC8C /* SearchResultViewController.swift */; };
@@ -59,7 +57,6 @@
 		8BFB8D7E29C610BA001CB9FB /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB8D7D29C610BA001CB9FB /* Scene.swift */; };
 		8BFB8D8029C61282001CB9FB /* SceneCoordinatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB8D7F29C61282001CB9FB /* SceneCoordinatorType.swift */; };
 		8BFB8D8229C612DC001CB9FB /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB8D8129C612DC001CB9FB /* SceneCoordinator.swift */; };
-		8BFB8D8429C61488001CB9FB /* LatestSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB8D8329C61488001CB9FB /* LatestSearchModel.swift */; };
 		8BFB8D8629C614E6001CB9FB /* ViewModelBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BFB8D8529C614E6001CB9FB /* ViewModelBase.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,8 +105,6 @@
 		8B46ACB929C6078D00B1AC8C /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		8B46ACBB29C607E500B1AC8C /* SearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		8B46ACBD29C607F100B1AC8C /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
-		8B46ACBF29C608BB00B1AC8C /* SearchReusltModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReusltModel.swift; sourceTree = "<group>"; };
-		8B46ACC129C608C800B1AC8C /* AppDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDetailModel.swift; sourceTree = "<group>"; };
 		8B46ACC729C6095E00B1AC8C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8B46ACC929C6096D00B1AC8C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		8B46ACCB29C609D200B1AC8C /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
@@ -143,7 +138,6 @@
 		8BFB8D7D29C610BA001CB9FB /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		8BFB8D7F29C61282001CB9FB /* SceneCoordinatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinatorType.swift; sourceTree = "<group>"; };
 		8BFB8D8129C612DC001CB9FB /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
-		8BFB8D8329C61488001CB9FB /* LatestSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestSearchModel.swift; sourceTree = "<group>"; };
 		8BFB8D8529C614E6001CB9FB /* ViewModelBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelBase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -259,7 +253,6 @@
 				8BA41AA929C69CE400DF87A4 /* Common */,
 				8B62EAB029C6DCD300749D50 /* Domain */,
 				8B62EAB929C6E0A600749D50 /* Presentation */,
-				8B46ACB729C6071A00B1AC8C /* Model */,
 				8B62EAAD29C6DC4700749D50 /* Network */,
 				8B46AC8529C6060900B1AC8C /* AppDelegate.swift */,
 				8B46AC8729C6060900B1AC8C /* SceneDelegate.swift */,
@@ -284,16 +277,6 @@
 				8B46ACA829C6060A00B1AC8C /* AppStoreUITestsLaunchTests.swift */,
 			);
 			path = AppStoreUITests;
-			sourceTree = "<group>";
-		};
-		8B46ACB729C6071A00B1AC8C /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				8BFB8D8329C61488001CB9FB /* LatestSearchModel.swift */,
-				8B46ACBF29C608BB00B1AC8C /* SearchReusltModel.swift */,
-				8B46ACC129C608C800B1AC8C /* AppDetailModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		8B46ACB829C6071F00B1AC8C /* Scene */ = {
@@ -712,7 +695,6 @@
 				8B46ACCC29C609D200B1AC8C /* SearchResultViewController.swift in Sources */,
 				8BFB8D7E29C610BA001CB9FB /* Scene.swift in Sources */,
 				8B080CEE29C6FF59006E412A /* SearchRepositoryInterface.swift in Sources */,
-				8BFB8D8429C61488001CB9FB /* LatestSearchModel.swift in Sources */,
 				8B6DBD7029C87BE5004423BD /* ImageDownloadUseCase.swift in Sources */,
 				8B6DBD7629C8A7E3004423BD /* DetailViewController+ScreenShot.swift in Sources */,
 				8BEB62A529C72D3A0068D4AC /* SearchResultUseCaseInterface.swift in Sources */,
@@ -730,8 +712,6 @@
 				8B62EAAF29C6DC6300749D50 /* NetworkService.swift in Sources */,
 				8B46AC8829C6060900B1AC8C /* SceneDelegate.swift in Sources */,
 				8BFB8D7A29C60EE6001CB9FB /* ViewModelBindableType.swift in Sources */,
-				8B46ACC029C608BB00B1AC8C /* SearchReusltModel.swift in Sources */,
-				8B46ACC229C608C800B1AC8C /* AppDetailModel.swift in Sources */,
 				8B46ACBE29C607F100B1AC8C /* DetailViewModel.swift in Sources */,
 				8B6DBD7A29C8A808004423BD /* DetailViewController+ReleaseInfo.swift in Sources */,
 				8B62EAB329C6DDBB00749D50 /* SearchUseCaseInterface.swift in Sources */,

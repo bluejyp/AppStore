@@ -22,10 +22,10 @@ extension DetailViewController {
     
     private func checkReleaseNote() {
         releaseNoteLabel.sizeToFit()
-        checkDecreaseHeight(needDecrease: releaseNoteLabel.bounds.height > 55)
+        checkReleaseNoteHeight(needDecrease: releaseNoteLabel.bounds.height > 55)
     }
     
-    private func checkDecreaseHeight(needDecrease: Bool) {
+    private func checkReleaseNoteHeight(needDecrease: Bool) {
         releaseNoteMoreButton.isHidden = !needDecrease
         
         if needDecrease {
@@ -36,7 +36,7 @@ extension DetailViewController {
     }
     
     @IBAction func didSelectReleaseMoreButton() {
-        checkDecreaseHeight(needDecrease: false)
+        checkReleaseNoteHeight(needDecrease: false)
         
         tableView.reloadData()
 //        tableView.performBatchUpdates(nil)
