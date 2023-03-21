@@ -283,7 +283,6 @@
 		8B46ACB829C6071F00B1AC8C /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				8BA41AB329C6A2B400DF87A4 /* Common */,
 				8BA41AB029C6A25A00DF87A4 /* Search */,
 				8BA41AB129C6A26300DF87A4 /* SearchResult */,
 				8BA41AB229C6A26A00DF87A4 /* Detail */,
@@ -405,13 +404,6 @@
 				8B46ACC929C6096D00B1AC8C /* DetailViewController.swift */,
 			);
 			path = Detail;
-			sourceTree = "<group>";
-		};
-		8BA41AB329C6A2B400DF87A4 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Common;
 			sourceTree = "<group>";
 		};
 		8BEB62A329C72D2B0068D4AC /* Protocol */ = {
