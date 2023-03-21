@@ -61,6 +61,7 @@ class SearchViewController: UIViewController {
         recentlyKeywordTableView.rx.modelSelected(String.self)
             .subscribe { [weak self] keyword in
                 self?.searchController.searchBar.text = keyword
+                self?.searchKeyword.onNext(keyword)
                 self?.searchResultController.searchKeyword.onNext(keyword)
                 self?.searchController.searchBar.becomeFirstResponder()
                 
