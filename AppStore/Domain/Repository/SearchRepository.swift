@@ -32,12 +32,12 @@ class SearchRepository: SearchRepositoryInterface {
             historyList = [String]()
         }
         
-        if let historyList = historyList,
-            historyList.contains(keyword) {
-            return
+        if let list = historyList,
+           list.contains(keyword) {
+            historyList = list.filter({ $0 != keyword})
         }
-        
-        historyList?.append(keyword)
+
+        historyList?.insert(keyword, at: 0)
         UserDefaults.standard.set(historyList, forKey: KEYWORD_HISTORY)
         keywordHistory.accept(historyList ?? [])
     }

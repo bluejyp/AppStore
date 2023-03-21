@@ -88,7 +88,7 @@ extension SearchViewController {
                 return self?.searchController.searchBar.text
             }.bind(to: searchResultController.searchKeyword)
             .disposed(by: disposeBag)
-        
+         
         /// 검색어를 스토리지에 저장
         searchController.searchBar.rx.searchButtonClicked
             .bind { [weak self] in

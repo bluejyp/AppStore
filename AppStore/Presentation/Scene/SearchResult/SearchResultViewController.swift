@@ -73,7 +73,7 @@ class SearchResultViewController: UIViewController {
                 searchResultCell.viewModel = SearchResultCellViewModel(info: info)
             }
         }
-        .disposed(by: disposeBag)
+        .disposed(by: disposeBag) 
         
         // 최근 검색어 선택 시
         searchResultTableView.rx.modelSelected(RawDataProtocol.self)
