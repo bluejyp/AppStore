@@ -2,22 +2,20 @@
 //  DetailViewModel.swift
 //  AppStore
 //
-//  Created by 박진영 on 2023/03/18.
+//  Created by Jinyoung on 2023/03/18.
 //
 
 import Foundation
 
 class DetailViewModel {
-    var appInfo: AppInfo
+    internal var appInfo: AppInfo
     
     init(info: AppInfo) {
         appInfo = info
     }
-    
-    
 }
 
-// title
+/// title
 extension DetailViewModel {
     var icon512ImageUrlString: String {
         appInfo.artworkUrl512
@@ -32,8 +30,7 @@ extension DetailViewModel {
     }
 }
 
-
-// rating
+/// rating
 extension DetailViewModel {
     var rating: Double {
         Double(appInfo.averageUserRatingForCurrentVersion ?? 0)
@@ -80,6 +77,7 @@ extension DetailViewModel {
 }
 
 
+/// Release Note
 extension DetailViewModel {
     var version: String? {
         appInfo.version
@@ -108,28 +106,24 @@ extension DetailViewModel {
     }
 }
 
+
+/// Screenshot
 extension DetailViewModel {
     var screenshotUrls: [String]? {
         appInfo.screenshotUrls
     }
 }
 
-
+/// Description
 extension DetailViewModel {
     var description: String? {
         appInfo.description
     }
 }
 
-
+/// Developer
 extension DetailViewModel {
     var sellerName: String? {
         appInfo.sellerName
     }
 }
-
-
-extension DetailViewModel {
-    
-}
-

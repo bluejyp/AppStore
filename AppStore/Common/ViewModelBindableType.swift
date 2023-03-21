@@ -2,7 +2,7 @@
 //  ViewModelBindableType.swift
 //  AppStore
 //
-//  Created by 박진영 on 2023/03/19.
+//  Created by Jinyoung on 2023/03/19.
 //
 
 import UIKit

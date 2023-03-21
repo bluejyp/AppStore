@@ -34,7 +34,6 @@ class SearchRepository: SearchRepositoryInterface {
         
         if let historyList = historyList,
             historyList.contains(keyword) {
-            // 최근 검색어 목록에 이미 존재하는 경우
             return
         }
         

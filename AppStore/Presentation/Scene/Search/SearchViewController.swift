@@ -2,7 +2,7 @@
 //  SearchViewController.swift
 //  AppStore
 //
-//  Created by 박진영 on 2023/03/18.
+//  Created by Jinyoung on 2023/03/18.
 //
 
 import UIKit
@@ -82,14 +82,14 @@ extension SearchViewController {
     }
     
     fileprivate func bindingSearchView() {
-        // 검색 시작 시 SearchResultViewController에 키워드 전달
+        /// 검색 시작 시 SearchResultViewController에 키워드 전달
         searchController.searchBar.rx.searchButtonClicked
             .compactMap { [weak self] in
                 return self?.searchController.searchBar.text
             }.bind(to: searchResultController.searchKeyword)
             .disposed(by: disposeBag)
         
-        // 검색어를 스토리지에 저장
+        /// 검색어를 스토리지에 저장
         searchController.searchBar.rx.searchButtonClicked
             .bind { [weak self] in
                 let string = self?.searchController.searchBar.text ?? ""
@@ -97,7 +97,7 @@ extension SearchViewController {
             }
             .disposed(by: disposeBag)
 
-        // 서치바 text가 변경될 때
+        /// 서치바 text가 변경될 때
         searchController.searchBar.rx.text
 //            .debounce(.milliseconds(1000), scheduler: MainScheduler.instance)
             .subscribe { [weak self] keyword in
@@ -105,7 +105,7 @@ extension SearchViewController {
         }
         .disposed(by: disposeBag)
 
-        // 캔슬버튼 선택 시
+        /// 캔슬버튼 선택 시
         searchController.searchBar.rx.cancelButtonClicked
             .compactMap{""}
             .bind(to: searchResultController.searchKeyword)
