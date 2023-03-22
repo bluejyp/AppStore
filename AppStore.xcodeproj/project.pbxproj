@@ -43,6 +43,12 @@
 		8B6DBD7C29C8A818004423BD /* DetailViewController+Rating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD7B29C8A818004423BD /* DetailViewController+Rating.swift */; };
 		8B6DBD7F29C8A8E3004423BD /* DetailViewController+Developer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD7E29C8A8E3004423BD /* DetailViewController+Developer.swift */; };
 		8B6DBD8129C8A907004423BD /* DetailViewController+Description.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6DBD8029C8A907004423BD /* DetailViewController+Description.swift */; };
+		8B7657FD29CB25D000069780 /* MockSearchResultUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B7657FC29CB25D000069780 /* MockSearchResultUseCase.swift */; };
+		8B76580329CB278700069780 /* MockAPIResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B76580229CB278700069780 /* MockAPIResponse.json */; };
+		8B76580729CB281F00069780 /* MockSearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B76580629CB281F00069780 /* MockSearchResultViewModel.swift */; };
+		8B76580B29CB2C3300069780 /* MockAPIResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B76580229CB278700069780 /* MockAPIResponse.json */; };
+		8B76580D29CB2CC100069780 /* MockAPIResponse2.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B76580C29CB2CC100069780 /* MockAPIResponse2.json */; };
+		8B76580E29CB2CC100069780 /* MockAPIResponse2.json in Resources */ = {isa = PBXBuildFile; fileRef = 8B76580C29CB2CC100069780 /* MockAPIResponse2.json */; };
 		8BA41AAB29C69CFF00DF87A4 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA41AAA29C69CFF00DF87A4 /* UIViewController+Extensions.swift */; };
 		8BA41AAD29C69FC700DF87A4 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA41AAC29C69FC700DF87A4 /* SearchResultCell.swift */; };
 		8BA41AAF29C6A03200DF87A4 /* KeywordHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA41AAE29C6A03200DF87A4 /* KeywordHistoryCell.swift */; };
@@ -120,6 +126,10 @@
 		8B6DBD7B29C8A818004423BD /* DetailViewController+Rating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Rating.swift"; sourceTree = "<group>"; };
 		8B6DBD7E29C8A8E3004423BD /* DetailViewController+Developer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Developer.swift"; sourceTree = "<group>"; };
 		8B6DBD8029C8A907004423BD /* DetailViewController+Description.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DetailViewController+Description.swift"; sourceTree = "<group>"; };
+		8B7657FC29CB25D000069780 /* MockSearchResultUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchResultUseCase.swift; sourceTree = "<group>"; };
+		8B76580229CB278700069780 /* MockAPIResponse.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockAPIResponse.json; sourceTree = "<group>"; };
+		8B76580629CB281F00069780 /* MockSearchResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchResultViewModel.swift; sourceTree = "<group>"; };
+		8B76580C29CB2CC100069780 /* MockAPIResponse2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockAPIResponse2.json; sourceTree = "<group>"; };
 		8BA41AAA29C69CFF00DF87A4 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		8BA41AAC29C69FC700DF87A4 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		8BA41AAE29C6A03200DF87A4 /* KeywordHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordHistoryCell.swift; sourceTree = "<group>"; };
@@ -258,6 +268,8 @@
 		8B46AC9B29C6060A00B1AC8C /* AppStoreTests */ = {
 			isa = PBXGroup;
 			children = (
+				8B76580429CB27E700069780 /* Resource */,
+				8B76580529CB27F300069780 /* Mock */,
 				8B46AC9C29C6060A00B1AC8C /* AppStoreTests.swift */,
 			);
 			path = AppStoreTests;
@@ -352,6 +364,24 @@
 				8B6DBD7E29C8A8E3004423BD /* DetailViewController+Developer.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		8B76580429CB27E700069780 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				8B76580229CB278700069780 /* MockAPIResponse.json */,
+				8B76580C29CB2CC100069780 /* MockAPIResponse2.json */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		8B76580529CB27F300069780 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				8B7657FC29CB25D000069780 /* MockSearchResultUseCase.swift */,
+				8B76580629CB281F00069780 /* MockSearchResultViewModel.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		8BA41AA929C69CE400DF87A4 /* Common */ = {
@@ -544,6 +574,8 @@
 				8B46AC9229C6060A00B1AC8C /* LaunchScreen.storyboard in Resources */,
 				8B46AC8F29C6060A00B1AC8C /* Assets.xcassets in Resources */,
 				8B46AC8D29C6060900B1AC8C /* Main.storyboard in Resources */,
+				8B76580B29CB2C3300069780 /* MockAPIResponse.json in Resources */,
+				8B76580D29CB2CC100069780 /* MockAPIResponse2.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +583,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B76580E29CB2CC100069780 /* MockAPIResponse2.json in Resources */,
+				8B76580329CB278700069780 /* MockAPIResponse.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,6 +750,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B7657FD29CB25D000069780 /* MockSearchResultUseCase.swift in Sources */,
+				8B76580729CB281F00069780 /* MockSearchResultViewModel.swift in Sources */,
 				8B46AC9D29C6060A00B1AC8C /* AppStoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

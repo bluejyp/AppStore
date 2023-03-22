@@ -16,7 +16,7 @@ enum ViewType {
     case error
 }
 
-class SearchResultViewController: UIViewController {
+final class SearchResultViewController: UIViewController {
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var filteredHistoryTableView: UITableView!
     @IBOutlet weak var infoCoverView: UIView!
@@ -24,7 +24,7 @@ class SearchResultViewController: UIViewController {
     
     weak var parentNavigationController: UINavigationController?
     
-    var viewModel = SearchResultViewModel()
+    var viewModel = SearchResultViewModel(searchResultUseCase: SearchResultUseCase())
     let disposeBag = DisposeBag()
     
     var searchKeyword: PublishSubject<String> = PublishSubject<String>()
@@ -64,7 +64,8 @@ class SearchResultViewController: UIViewController {
     private func bindViewModel() {
         let output = viewModel.transform(input: SearchResultViewModel.Input(keyword: searchKeyword))
         
-        output.searchResultList.observe(on: MainScheduler.instance)
+        output.searchResultList
+            .observe(on: MainScheduler.instance)
             .subscribe(onNext: { [weak self] result in
                 switch result {
                 case .success(let data):

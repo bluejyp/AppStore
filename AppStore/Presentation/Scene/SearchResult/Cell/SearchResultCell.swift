@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 import Cosmos
 
-class SearchResultCell: UITableViewCell {
+final class SearchResultCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var iconImgView: UIImageView!

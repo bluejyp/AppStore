@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ImageDownloadUseCase: ImageDownloadUseCaseInterface {
+final class ImageDownloadUseCase: ImageDownloadUseCaseInterface {
     static let shared = ImageDownloadUseCase()
     
     private var cache = NSCache<NSString,UIImage>()

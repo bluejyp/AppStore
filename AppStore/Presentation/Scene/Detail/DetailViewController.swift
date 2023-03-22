@@ -21,7 +21,7 @@ enum DetailTableRowInfo: Int {
     }
 }
 
-class DetailViewController: UITableViewController {
+final class DetailViewController: UITableViewController {
     // title
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

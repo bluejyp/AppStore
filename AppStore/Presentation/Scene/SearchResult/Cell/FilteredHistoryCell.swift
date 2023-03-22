@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilteredHistoryCell: UITableViewCell {
+final class FilteredHistoryCell: UITableViewCell {
     @IBOutlet weak var keywordLabel: UILabel!
 
     override func awakeFromNib() {

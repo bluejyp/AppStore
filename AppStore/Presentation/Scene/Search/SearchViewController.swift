@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SearchViewController: UIViewController {
+final class SearchViewController: UIViewController {
     @IBOutlet weak var recentlyKeywordTableView: UITableView!
     
     lazy var searchController: UISearchController = {

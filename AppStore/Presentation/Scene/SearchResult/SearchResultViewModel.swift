@@ -9,8 +9,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SearchResultViewModel: ViewModelBase {
-    let searchResultUseCase = SearchResultUseCase()
+final class SearchResultViewModel: ViewModelBase {
+    let searchResultUseCase: SearchResultUseCaseInterface
     let disposeBag = DisposeBag()
 
     struct Input {
@@ -21,6 +21,10 @@ class SearchResultViewModel: ViewModelBase {
         var searchResultList: Observable<SearchResult>
     }
 
+    init(searchResultUseCase: SearchResultUseCaseInterface) {
+        self.searchResultUseCase = searchResultUseCase
+    }
+    
     func transform(input: Input) -> Output {
         let result = input.keyword
             .distinctUntilChanged()

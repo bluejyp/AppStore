@@ -8,7 +8,7 @@
 import Foundation
 import RxSwift
 
-class SearchResultUseCase: SearchResultUseCaseInterface {
+final class SearchResultUseCase: SearchResultUseCaseInterface {
     func searchResultList(keyword: String) -> Observable<SearchResult> {
         let request = SearchResultConfigurable(keyworkd: keyword).request()
         

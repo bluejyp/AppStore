@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SearchRepository: SearchRepositoryInterface {
+final class SearchRepository: SearchRepositoryInterface {
     var keywordHistory: BehaviorRelay<[String]>
     
     init() {

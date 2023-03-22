@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DetailViewModel {
+final class DetailViewModel {
     internal var appInfo: AppInfo
     
     init(info: AppInfo) {

@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class SearchViewModel: ViewModelBase {
+final class SearchViewModel: ViewModelBase {
     let searchUseCase = SearchUseCase(repository: SearchRepository())
     let disposeBag = DisposeBag()
    

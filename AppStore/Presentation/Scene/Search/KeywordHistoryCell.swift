@@ -7,7 +7,7 @@
 
 import UIKit
 
-class KeywordHistoryCell: UITableViewCell {
+final class KeywordHistoryCell: UITableViewCell {
     
     @IBOutlet weak var keywordLabel: UILabel!
 
