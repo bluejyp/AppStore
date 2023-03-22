@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 enum SearchError: Error {
-    case EmptyKeywordError
+    case emptyKeywordError
     case parsingError
     case responseError
     case mockdataError

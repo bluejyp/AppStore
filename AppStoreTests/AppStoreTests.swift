@@ -18,7 +18,7 @@ final class AppStoreTests: XCTestCase {
     override func tearDownWithError() throws { }
     
     func testSearchResultViewModel_ReturnNotNil() {
-        let viewModel = SearchResultViewModel(searchResultUseCase: MockSearchResultUseCase(mockResponse: "MockAPIResponse"))
+        let viewModel = SearchResultViewModel(searchResultUseCase: MockSearchResultUseCase(mockResponseFileName: "MockAPIResponse"))
         let input = SearchResultViewModel.Input(keyword: Observable.just("카카오"))
         let output = viewModel.transform(input: input)
         
@@ -43,7 +43,7 @@ final class AppStoreTests: XCTestCase {
     }
     
     func testSearchResultViewModel_ParsingAppInfo() {
-        let viewModel = SearchResultViewModel(searchResultUseCase: MockSearchResultUseCase(mockResponse: "MockAPIResponse2"))
+        let viewModel = SearchResultViewModel(searchResultUseCase: MockSearchResultUseCase(mockResponseFileName: "MockAPIResponse2"))
         let input = SearchResultViewModel.Input(keyword: Observable.just("카카오"))
         let output = viewModel.transform(input: input)
         

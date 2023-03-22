@@ -38,6 +38,7 @@ final class SearchRepository: SearchRepositoryInterface {
 
         historyList?.insert(keyword, at: 0)
         UserDefaults.standard.set(historyList, forKey: "KeywordHistory")
+        UserDefaults.standard.synchronize()
         keywordHistory.accept(historyList ?? [])
     }
 }

@@ -18,15 +18,15 @@ final class SearchResultUseCase: SearchResultUseCaseInterface {
                 if let resultData = data {
                     do {
                         let model = try JSONDecoder().decode(SearchResponseModel.self, from: resultData)
-                        return SearchResult.success(model.results ?? [])
+                        return .success(model.results ?? [])
                     } catch {
-                        return SearchResult.failure(.parsingError)
+                        return .failure(.parsingError)
                     }
                 } else {
-                    return SearchResult.success([])
+                    return .success([])
                 }
             case .failure(_):
-                return SearchResult.failure(.responseError)
+                return .failure(.responseError)
             }
         }
     }

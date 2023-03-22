@@ -78,7 +78,7 @@ final class SearchResultViewController: UIViewController {
                     self?.searchResultList.onNext(data)
                     break
                 case .failure(let error):
-                    if error == .EmptyKeywordError {
+                    if error == .emptyKeywordError {
                         self?.searchResultList.onNext([])
                     }
                     break

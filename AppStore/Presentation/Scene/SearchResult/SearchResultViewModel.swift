@@ -30,11 +30,11 @@ final class SearchResultViewModel: ViewModelBase {
             .distinctUntilChanged()
             .flatMapLatest { [weak self] keyword -> Observable<SearchResult> in
                 guard let self = self else {
-                    return .just(SearchResult.failure(.unkownError))
+                    return .just(.failure(.unkownError))
                 }
                 
                 guard keyword.count > 0 else {
-                    return .just(SearchResult.failure(.EmptyKeywordError))
+                    return .just(.failure(.emptyKeywordError))
                 }
                 
                 return self.searchResultUseCase.searchResultList(keyword: keyword)
