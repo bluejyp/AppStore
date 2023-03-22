@@ -12,6 +12,7 @@ import RxSwift
 final class AppStoreTests: XCTestCase {
    
     let disposeBag = DisposeBag()
+    let expectation = XCTestExpectation(description: "aync")
     
     override func setUpWithError() throws { }
     override func tearDownWithError() throws { }
@@ -33,8 +34,12 @@ final class AppStoreTests: XCTestCase {
                     XCTAssert(false)
                     break
                 }
+                
+                self.expectation.fulfill()
             })
             .disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 10)
     }
     
     func testSearchResultViewModel_ParsingAppInfo() {
@@ -60,7 +65,11 @@ final class AppStoreTests: XCTestCase {
                     XCTAssert(false)
                     break
                 }
+                
+                self.expectation.fulfill()
             })
             .disposed(by: disposeBag)
+        
+        wait(for: [expectation], timeout: 10)
     }
 }
