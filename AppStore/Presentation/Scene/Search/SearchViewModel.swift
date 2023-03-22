@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 final class SearchViewModel: ViewModelBase {
-    let searchUseCase = SearchUseCase(repository: SearchRepository())
+    let searchUseCase: SearchUseCaseInterface
     let disposeBag = DisposeBag()
    
     struct Input {
@@ -21,6 +21,10 @@ final class SearchViewModel: ViewModelBase {
     struct Output {
         var recentlyKeywordList: Observable<[String]>
         var filteredKeyWordHistory: Observable<[String]>
+    }
+    
+    init(searchUseCase: SearchUseCaseInterface) {
+        self.searchUseCase = searchUseCase
     }
     
     func transform(input: Input) -> Output {

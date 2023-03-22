@@ -25,7 +25,7 @@ final class SearchViewController: UIViewController {
         return resultViewController
     }()
     
-    var viewModel = SearchViewModel()
+    var viewModel = SearchViewModel(searchUseCase: SearchUseCase(repository: SearchRepository()))
     let disposeBag = DisposeBag()
     var searchKeyword: PublishSubject<String> = PublishSubject<String>()
     var recentlyKeywordList = PublishSubject<[String]>()
