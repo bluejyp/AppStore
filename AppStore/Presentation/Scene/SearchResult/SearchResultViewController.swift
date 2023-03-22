@@ -9,9 +9,19 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+enum ViewType {
+    case keywordHistory
+    case searchResult
+    case emptyResult
+    case error
+}
+
 class SearchResultViewController: UIViewController {
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var filteredHistoryTableView: UITableView!
+    @IBOutlet weak var infoCoverView: UIView!
+    @IBOutlet weak var infoLabel: UILabel!
+    
     weak var parentNavigationController: UINavigationController?
     
     var viewModel = SearchResultViewModel()
@@ -20,6 +30,30 @@ class SearchResultViewController: UIViewController {
     var searchKeyword: PublishSubject<String> = PublishSubject<String>()
     var searchResultList = BehaviorSubject<[RawDataProtocol]>(value: [])
     var filteredKeywordHistory: PublishSubject<[String]> = PublishSubject<[String]>()
+    var viewType: ViewType = .keywordHistory{
+        didSet {
+            switch viewType {
+            case .keywordHistory:
+                filteredHistoryTableView.isHidden = false
+                searchResultTableView.isHidden = true
+                infoCoverView.isHidden = true
+            case .searchResult:
+                filteredHistoryTableView.isHidden = true
+                searchResultTableView.isHidden = false
+                infoCoverView.isHidden = true
+            case .emptyResult:
+                filteredHistoryTableView.isHidden = true
+                searchResultTableView.isHidden = true
+                infoCoverView.isHidden = false
+                infoLabel.text = "검색 결과가 없습니다"
+            case .error:
+                filteredHistoryTableView.isHidden = true
+                searchResultTableView.isHidden = true
+                infoCoverView.isHidden = false
+                infoLabel.text = "에러가 발생했습니다"
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +68,12 @@ class SearchResultViewController: UIViewController {
             .subscribe(onNext: { [weak self] result in
                 switch result {
                 case .success(let data):
-                    self?.filteredHistoryTableView.isHidden = true
+                    if data.count == 0 {
+                        self?.viewType = .emptyResult
+                    } else {
+                        self?.viewType = .searchResult
+                    }
+                    
                     self?.searchResultList.onNext(data)
                     break
                 case .failure(let error):
@@ -48,10 +87,10 @@ class SearchResultViewController: UIViewController {
         
         filteredKeywordHistory
             .subscribe { [weak self] history in
-                self?.filteredHistoryTableView.isHidden = history.count == 0
-                
                 if history.count == 0 {
                     self?.searchResultList.onNext([])
+                } else {
+                    self?.viewType = .keywordHistory
                 }
         }
         .disposed(by: disposeBag)
@@ -66,8 +105,8 @@ class SearchResultViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        
-        searchResultList.bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchResultCell")) { (index, element, cell) in
+        searchResultList
+            .bind(to: searchResultTableView.rx.items(cellIdentifier: "SearchResultCell")) { (index, element, cell) in
             if let searchResultCell = cell as? SearchResultCell,
                let info = element as? AppInfo {
                 searchResultCell.viewModel = SearchResultCellViewModel(info: info)
@@ -75,12 +114,18 @@ class SearchResultViewController: UIViewController {
         }
         .disposed(by: disposeBag) 
         
-        // 최근 검색어 선택 시
         searchResultTableView.rx.modelSelected(RawDataProtocol.self)
             .subscribe { [weak self] data in
                 if let info = data.element as? AppInfo {
                     self?.presentDetailViewController(info: info)
                 }
+            }
+            .disposed(by: disposeBag)
+        
+        filteredHistoryTableView.rx.modelSelected(String.self)
+            .subscribe { [weak self] keyword in
+                self?.viewType = .searchResult
+                self?.searchKeyword.onNext(keyword)
             }
             .disposed(by: disposeBag)
     }

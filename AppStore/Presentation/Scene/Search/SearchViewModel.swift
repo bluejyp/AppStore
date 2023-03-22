@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 class SearchViewModel: ViewModelBase {
-    let searchUseCase = SearchUseCase()
+    let searchUseCase = SearchUseCase(repository: SearchRepository())
     let disposeBag = DisposeBag()
    
     struct Input {
@@ -19,14 +19,15 @@ class SearchViewModel: ViewModelBase {
     }
     
     struct Output {
-        var recentlyKeywordList: BehaviorRelay<[String]>
+        var recentlyKeywordList: Observable<[String]>
         var filteredKeyWordHistory: Observable<[String]>
     }
     
     func transform(input: Input) -> Output {
         let filteredKeyWordHistory = input.currentKeyword
             .flatMapLatest { [weak self] keyword -> Observable<[String]> in
-                let result = self?.searchUseCase.keywordHistory.value.filter({ $0.contains(keyword)})
+                let result = self?.searchUseCase.keywordHistory.value
+                    .filter({ $0.contains(keyword)})
                 return .just(result ?? [])
             }
 
@@ -35,7 +36,7 @@ class SearchViewModel: ViewModelBase {
         }
         .disposed(by: disposeBag)
         
-        let publish = searchUseCase.keywordHistory
-        return Output(recentlyKeywordList: publish, filteredKeyWordHistory: filteredKeyWordHistory)
+        return Output(recentlyKeywordList: searchUseCase.keywordHistory.asObservable(),
+                      filteredKeyWordHistory: filteredKeyWordHistory)
     }
 }

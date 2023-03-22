@@ -8,10 +8,6 @@
 import Foundation
 import RxSwift
 
-protocol RawDataProtocol: Codable {
-    
-}
-
 enum SearchError: Error {
     case EmptyKeywordError
     case parsingError

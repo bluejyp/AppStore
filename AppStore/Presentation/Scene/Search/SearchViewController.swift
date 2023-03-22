@@ -36,12 +36,22 @@ class SearchViewController: UIViewController {
 
         configureUI()
         bindViewModel()
-        bindingSearchView()
+        bindSearchView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    private func configureUI() {
+        self.navigationItem.title = "검색"
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        searchController.searchBar.placeholder = "게임, 앱, 스토리 등"
+        searchController.obscuresBackgroundDuringPresentation = false
     }
     
     func bindViewModel() {
@@ -52,7 +62,8 @@ class SearchViewController: UIViewController {
                 if let keywordHistoryCell = cell as? KeywordHistoryCell {
                     keywordHistoryCell.keywordLabel.text = element
                 }
-            }.disposed(by: disposeBag)
+            }
+            .disposed(by: disposeBag)
         
         output.filteredKeyWordHistory
             .bind(to: searchResultController.filteredKeywordHistory)
@@ -60,57 +71,42 @@ class SearchViewController: UIViewController {
             
         recentlyKeywordTableView.rx.modelSelected(String.self)
             .subscribe { [weak self] keyword in
-                self?.searchController.searchBar.text = keyword
-                self?.searchKeyword.onNext(keyword)
-                self?.searchResultController.searchKeyword.onNext(keyword)
-                self?.searchController.searchBar.becomeFirstResponder()
-                
+                self?.executeSearching(with: keyword)
             }
             .disposed(by: disposeBag)
     }
-}
-
-extension SearchViewController {
-    private func configureUI() {
-        
-        self.navigationItem.title = "검색"
-        
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        
-        searchController.searchBar.placeholder = "게임, 앱, 스토리 등"
-        searchController.obscuresBackgroundDuringPresentation = false
-    }
     
-    fileprivate func bindingSearchView() {
-        /// 검색 시작 시 SearchResultViewController에 키워드 전달
+    fileprivate func bindSearchView() {
         searchController.searchBar.rx.searchButtonClicked
             .compactMap { [weak self] in
                 return self?.searchController.searchBar.text
             }.bind(to: searchResultController.searchKeyword)
             .disposed(by: disposeBag)
          
-        /// 검색어를 스토리지에 저장
         searchController.searchBar.rx.searchButtonClicked
             .bind { [weak self] in
                 let string = self?.searchController.searchBar.text ?? ""
+                self?.searchResultController.searchResultList.onNext([])
                 self?.searchKeyword.onNext(string)
             }
             .disposed(by: disposeBag)
 
-        /// 서치바 text가 변경될 때
         searchController.searchBar.rx.text
-//            .debounce(.milliseconds(1000), scheduler: MainScheduler.instance)
             .subscribe { [weak self] keyword in
             self?.currentKeyword.onNext(keyword ?? "")
         }
         .disposed(by: disposeBag)
 
-        /// 캔슬버튼 선택 시
         searchController.searchBar.rx.cancelButtonClicked
             .compactMap{""}
             .bind(to: searchResultController.searchKeyword)
             .disposed(by: disposeBag)
     }
 
+    private func executeSearching(with keyword: String) {
+        searchController.searchBar.text = keyword
+        searchKeyword.onNext(keyword)
+        searchResultController.searchKeyword.onNext(keyword)
+        searchController.searchBar.becomeFirstResponder()
+    }
 }

@@ -10,8 +10,12 @@ import RxSwift
 import RxCocoa
 
 final class SearchUseCase: SearchUseCaseInterface {
-    private let searchRepository = SearchRepository()
+    var searchRepository: SearchRepositoryInterface
    
+    init(repository: SearchRepositoryInterface) {
+        searchRepository = repository
+    }
+    
     var keywordHistory: BehaviorRelay<[String]> {
         searchRepository.keywordHistory
     }

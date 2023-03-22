@@ -34,7 +34,5 @@ extension DetailViewController {
         checkDescriptionCellHeight(needDecrease: false)
         
         tableView.reloadData()
-//        tableView.performBatchUpdates(nil)
-        
     }
 }

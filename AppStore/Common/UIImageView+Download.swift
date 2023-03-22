@@ -8,7 +8,6 @@
 import UIKit
 
 extension UIImageView {
-    
     private struct CustomProperties {
         static var downloadURLString: String? = nil
     }
@@ -24,12 +23,11 @@ extension UIImageView {
         }
     }
     
-    ///  Cache 이미지를 탐색하고 없다면 Download를 진행해서 적용하고 , 저장합니다.
-    /// - Parameter urlStrig: Image URL String
     func setImage(urlStrig: String) {
         self.cancelDownload()
         self.downloadURL = urlStrig
         self.image = UIImage(named: "placeholder")
+        
         ImageDownloadUseCase.shared.getImage(urlStrig) { image in
             DispatchQueue.main.async { [weak self] in
                 if let image = image {

@@ -10,23 +10,22 @@ import RxSwift
 import RxCocoa
 
 class SearchRepository: SearchRepositoryInterface {
-    private let KEYWORD_HISTORY = "KeywordHistory"
     var keywordHistory: BehaviorRelay<[String]>
     
     init() {
-        let fetchedlist = UserDefaults.standard.object(forKey: KEYWORD_HISTORY) as? [String]
+        let fetchedlist = UserDefaults.standard.object(forKey: "KeywordHistory") as? [String]
         keywordHistory = BehaviorRelay<[String]>(value: fetchedlist ?? [])
     }
 
     func fetchKeywordHistory() {
-        let fetchedlist = UserDefaults.standard.object(forKey: KEYWORD_HISTORY) as? [String]
+        let fetchedlist = UserDefaults.standard.object(forKey: "KeywordHistory") as? [String]
         keywordHistory.accept(fetchedlist ?? [])
     }
     
     func save(keyword: String) {
         guard keyword.count > 0 else { return }
         
-        var historyList = UserDefaults.standard.object(forKey: KEYWORD_HISTORY) as? [String]
+        var historyList = UserDefaults.standard.object(forKey: "KeywordHistory") as? [String]
         
         if historyList == nil {
             historyList = [String]()
@@ -38,7 +37,7 @@ class SearchRepository: SearchRepositoryInterface {
         }
 
         historyList?.insert(keyword, at: 0)
-        UserDefaults.standard.set(historyList, forKey: KEYWORD_HISTORY)
+        UserDefaults.standard.set(historyList, forKey: "KeywordHistory")
         keywordHistory.accept(historyList ?? [])
     }
 }

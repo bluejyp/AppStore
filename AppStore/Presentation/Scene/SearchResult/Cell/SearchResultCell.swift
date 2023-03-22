@@ -24,9 +24,10 @@ class SearchResultCell: UITableViewCell {
     
     private lazy var cosmosRatingView: CosmosView = {
         let cosmos = CosmosView()
-        cosmos.frame = CGRect(x: 0, y: 0,
-                                  width: ratingContainerView.frame.size.width,
-                                  height: ratingContainerView.frame.size.height)
+        cosmos.frame = CGRect(x: 0,
+                              y: 0,
+                              width: ratingContainerView.frame.size.width,
+                              height: ratingContainerView.frame.size.height)
         cosmos.settings.updateOnTouch = false
         cosmos.settings.emptyBorderColor = UIColor.darkGray
         cosmos.settings.totalStars = 5
@@ -35,12 +36,14 @@ class SearchResultCell: UITableViewCell {
         cosmos.settings.filledBorderColor = UIColor.darkGray
         cosmos.settings.filledColor = UIColor.darkGray
         ratingContainerView.addSubview(cosmos)
+        
         return cosmos
     }()
     
     var viewModel: SearchResultCellViewModel? {
         didSet {
             guard let viewModel = viewModel else { return }
+            
             titleLabel.text = viewModel.title
             subTitleLabel.text = viewModel.subtitle
             downLoadCountLabel.text = viewModel.ratingCount
@@ -55,8 +58,6 @@ class SearchResultCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         downBtn.setTitle("받기", for: .normal)
     }
-    
 }

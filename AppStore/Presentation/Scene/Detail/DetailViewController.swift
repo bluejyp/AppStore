@@ -61,9 +61,10 @@ class DetailViewController: UITableViewController {
     var viewModel: DetailViewModel?
     lazy var cosmosRatingView: CosmosView = {
         let cosmos = CosmosView()
-        cosmos.frame = CGRect(x: 0, y: 0,
-                                  width: ratingContainerView.frame.size.width,
-                                  height: ratingContainerView.frame.size.height)
+        cosmos.frame = CGRect(x: 0,
+                              y: 0,
+                              width: ratingContainerView.frame.size.width,
+                              height: ratingContainerView.frame.size.height)
         cosmos.settings.updateOnTouch = false
         cosmos.settings.emptyBorderColor = UIColor.darkGray
         cosmos.settings.totalStars = 5
@@ -78,8 +79,6 @@ class DetailViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     

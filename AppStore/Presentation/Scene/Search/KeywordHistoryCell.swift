@@ -14,4 +14,9 @@ class KeywordHistoryCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        keywordLabel.text = ""
+    }
 }
